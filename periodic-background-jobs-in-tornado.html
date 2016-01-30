@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>periodic background jobs in tornado</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css' async> 
+    <style>
+    *{margin:0;padding:0;}
+    body{text-align: center;background:#9bd6b8;color: #505664;}
+    #blog{width: 60%;margin:0 auto;}
+    #blog p{margin-top: 1em;}
+    h1{font-size: 3em;font-family: 'Pacifico',cursive;font-weight: 400;margin-top:7%;}
+    h2{font-size: 2em;font-family: 'Pacifico',cursive;font-weight: 400;margin-top:1%;}
+    a{color: #505664;text-decoration:none;}
+    ::selection {
+      background:#505664;
+      color:#9bd6b8;
+    }
+    ::-moz-selection {
+      background:#505664;
+      color:#9bd6b8;
+    }
+    p{
+      font-size: 1.1em;
+    }
+
+    ul{
+      list-style-type: none;
+    }
+
+    ul li:hover{
+      font-size:1.2em;
+      padding-bottom:0.1em;
+      -webkit-transition: all 0.4s ease;
+      -moz-transition: all 0.4s ease;
+      -o-transition: all 0.4s ease;
+      -ms-transition: all 0.4s ease;
+    }
+    footer{
+      margin-top: 6em;
+    }
+    pre{
+      text-align: left
+    }
+    
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "keywords": "python, class, method, dynamic",
+      "name": "call python class method dynamically",
+      "creator": {
+        "name": "Mehmet Köse",
+        "url": "http://mehmetkose.github.io",
+      }
+    }
+    </script>
+    <script src="https://highlightjs.org/static/highlight.pack.js"></script>
+</head>
+<body>
+  
+  <div id="blog">
+    <h1>periodic background jobs in tornado</h1>
+
+    <p>this loop runs every 60+ seconds</p>
+
+    <pre><code class="python">
+      @gen.coroutine
+      def long_job():
+          while True:
+              yield big_deal()
+              yield gen.sleep(60)
+
+      IOLoop.current().spawn_callback(long_job)
+    </code></pre>
+
+  </div>
+
+  <footer>
+	  <small><a href="https://mehmetkose.github.io">2016</a></small>
+  </footer>
+</body>
+</html>
