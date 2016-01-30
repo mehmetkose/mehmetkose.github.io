@@ -40,6 +40,9 @@
     footer{
       margin-top: 6em;
     }
+    pre{
+      text-align: left
+    }
     
     </style>
     <script type="application/ld+json">
@@ -59,19 +62,24 @@
   
   <div id="blog">
     <h1>call python class method dynamically like a boss</h1>
+    
+    <pre>
+    <code class="python">
+    # Our class
+    m = globals()['class_name']()
 
-    <p><strong># Our class</strong> <br />
-    m = globals()['class_name']()</p>
+    # Get the function (from the instance) that we need to call
+    func = getattr(m, 'func_name')
 
-    <p><strong># Get the function (from the instance) that we need to call</strong> <br />
-    func = getattr(m, 'func_name')</p>
-
-    <p><strong># Fire it</strong> <br />
-    func()</p>
+    # Fire it
+    func()
+    </code>
+    </pre>
   </div>
 
   <footer>
 	  <small><a href="https://mehmetkose.github.io">2016</a></small>
   </footer>
+<script src="https://highlightjs.org/static/highlight.pack.js"></script>
 </body>
 </html>
