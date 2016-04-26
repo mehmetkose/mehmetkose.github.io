@@ -112,7 +112,7 @@
 
     <p>Hmm böyle temel bir görev için çok fazla kod yazmak gerekiyor gibi.. Burada “async def”, “async with”, “await” var. İlk başta karmaşık gibi görünebilir, haydi açıklamaya çalışalım.</p>
 
-    <p><a href="https://www.python.org/dev/peps/pep-0492/#await-expression">async</a> deyimini fonksiyon deyiminden önce kullanarak ve fonksiyon içerisinde await kullanarak bir fonksiyonu asenkron hale getirirsiniz. Aslında merhaba() işlevi çalışırken iki asenkron operasyon gerçekleşir. Önce asenkron olarak yanıt getirilir, sonra asenkron olarak yanıt gövdesi okunur.</p>
+    <p><a href="https://www.python.org/dev/peps/pep-0492/#await-expression">async</a> deyimini fonksiyon tanımlarken kullandığımız def deyiminden önce kullanarak ve fonksiyon içerisinde await kullanarak bir fonksiyonu asenkron hale getirirsiniz. Aslında merhaba() işlevi çalışırken iki asenkron operasyon gerçekleşir. Önce asenkron olarak yanıt getirilir, sonra asenkron olarak yanıt gövdesi okunur.</p>
 
     <p>Aiohttp, istekler yapmak için birincil arabirim olarak ClientSession metodunu önerir. ClientSession iki istek arasındaki çerezleri saklayabilme imkanı verir ve tüm istekler için ortak olan nesneleri tutar (event loop, bağlantı ve diğer şeyler). Session kullanıldıktan sonra kapatılması gerekir ve oturum kapamak bir başka asenkron işlemdir. Bu yüzden async deyimine ihtiyacınız var ve her seferinde session'lar ile uğraşmanızın nedeni bu.</p>
 
@@ -121,6 +121,62 @@
     <p>Programı başlatmak için event loop (olay döngüsü)'nü çalıştırmanız gerekir ve bunu yapmak için asyncio instance'ı yaratmanız ve bu döngünün içine görevi koymanız gerekir. </p>
 
     <p>Tüm bunlar biraz zor geliyor olabilir fakat anlamaya çalışırken biraz zaman harcamak mantıklı görünüyor.</p>
+
+    <h2>Çoklu url getirmek</h2>
+
+    <p>Şimdi daha ilginç bir şey deneyelim ve birbirini takip eden isteklerle çoklu url getirelim. Senkron (Bildiğimiz normal çalışan) kod aşağıdaki gibi oluyor.</p>
+
+    <pre><code>
+    for url in urls:
+      print(requests.get(url).text)
+    </code></pre>
+
+    <p>Bu kodu yazması ve kullanması çok kolay, fakat Asenkron bu kodar kolay olmayacak. Bu yüzden daha karmaşık bir şeye gerçekten ihtiyacınız olup olmadığını her zaman düşünmelisiniz. Uygulamanız senkron kod ile düzgün çalışıyorsa belki de asenkron kod ile daha karmaşık hale getirmeye gerek olmayabilir. Eğer zahmetli olan yolu seçip Asenkron kod yazmak isterseniz yapmanız gereken şey aşağıda. Bizim merhaba() fonksiyonumuz hala aynı kalacak fakat bizim tüm listeyi görev olarak asyncio Future nesnesi haline getirip çalıştırılmak üzere loop'a vermemiz gerekiyor.</p>
+
+    <pre><code>
+      loop = asyncio.get_event_loop()
+      tasks = []
+      
+      url = "http://httpbin.org/get"
+      for i in range(5):
+          task = asyncio.ensure_future(hello(url.format(i)))
+          tasks.append(task)
+      loop.run_until_complete(asyncio.wait(tasks))
+    </code></pre>
+
+    <p>Şimdi diyelim ki tüm yanıtları toplamak ve onlara bazı ön işlemler uygulamak istiyoruz. Şu an biz hiçbir yerde yanıt gövdesini tutmuyoruz, sadece ekrana basıyoruz. Haydi yanıt döndürelim ve en sonda hepsini basalım. </p>
+
+    <p>Yanıtları bir gruba toparlamak için muhtemelen aşağıdaki gibi bir şey yapmak gerekir.</p>
+
+    <pre><code>
+      #!/usr/local/bin/python3.5
+      import asyncio
+      from aiohttp import ClientSession
+
+      async def fetch(url):
+          async with ClientSession() as session:
+              async with session.get(url) as response:
+                  return await response.read()
+
+      async def run(loop,  r):
+          url = "http://httpbin.org/get"
+          tasks = []
+          for i in range(r):
+              task = asyncio.ensure_future(fetch(url.format(i)))
+              tasks.append(task)
+
+          responses = await asyncio.gather(*tasks)
+          print_responses(responses)
+
+      def print_responses(result):
+          print(result)
+
+      loop = asyncio.get_event_loop()
+      future = asyncio.ensure_future(run(loop, 4))
+      loop.run_until_complete(future)
+    </code></pre>
+
+    <p><a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.gather">asyncio.gather(), Future nesnelerini bir yerde toplar ve hepsi bitinceye kadar bekler.</a></p>
 
 
     
