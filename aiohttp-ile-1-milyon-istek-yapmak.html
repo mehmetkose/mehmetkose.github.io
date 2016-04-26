@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>aiohttp ile 1 milyon istek yapmak</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css' async> 
+    <style>
+    *{margin:0;padding:0;}
+    body{text-align: center;background:#9bd6b8;color: #505664;}
+    #blog{width: 60%;margin:0 auto;}
+    #blog p{margin-top: 1em;}
+    h1{font-size: 3em;font-family: 'Pacifico',cursive;font-weight: 400;margin-top:7%;}
+    h2{font-size: 2em;font-family: 'Pacifico',cursive;font-weight: 400;margin-top:1%;}
+    a{color: #505664;text-decoration:none;}
+    ::selection {
+      background:#505664;
+      color:#9bd6b8;
+    }
+    ::-moz-selection {
+      background:#505664;
+      color:#9bd6b8;
+    }
+    p{
+      font-size: 1.1em;
+    }
+
+    ul{
+      list-style-type: none;
+    }
+
+    ul li:hover{
+      font-size:1.2em;
+      padding-bottom:0.1em;
+      -webkit-transition: all 0.4s ease;
+      -moz-transition: all 0.4s ease;
+      -o-transition: all 0.4s ease;
+      -ms-transition: all 0.4s ease;
+    }
+    footer{
+      margin-top: 6em;
+    }
+    pre{
+      text-align: left
+    }
+    pre{
+      text-align: left
+    }
+    
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "keywords": "tornado, python, background jobs",
+      "name": "aiohttp ile 1 milyon istek yapmak",
+      "creator": {
+        "name": "Mehmet Köse",
+        "url": "http://mehmetkose.github.io",
+      }
+    }
+    </script>
+</head>
+<body>
+  
+  <div id="blog">
+    <h1>aiohttp ile 1 milyon istek yapmak</h1>
+
+    <p>Bu yazıda Python aiohttp'nin sınırlarını test etmek ve dakikalık istek performansını kontrol etmek istiyorum. Herkes, asenkron kodun network işlerinde kullanıldığında daha iyi performans gösterdiğini bilir, fakat bu varsayımın tam olarak nasıl ve neden bu kadar iyi olduğunu kontrol etmek hala ilgi çekici. Python aiohttp ile bir milyon istek yaparak bunu kontrol edeceğim. Dakikada kaç istek yapacak? Basit bir script komut ile bunu yapmaya çalıştığımda ne tarz çökme ve hatalar beklemeliyim? Böyle bir yoğunlukta istek yapmaya çalışırken düşünülmesi gereken ana başlıklar nelerdir?</p>
+
+    <h2>Merhaba asyncio/aiohttp</h2>
+    
+    <p>Async programlama kolay değildir. Kolay değildir çünkü callback'ler kullanır, olayların şartlarını ve olay işleyicilerini düşünmek normal programlamadan çok daha fazla efor gerektirir. Ayrıca bu biraz farklı çünkü asyncio hala nispeten yeni ve bu konuyla alakalı sadece birkaç blog gönderisi ve eğitim var. Konuyla alakalı resmi Python Belgeleri ise çok yoğun anlatımlı ve sadece basit örnekleri içeriyor. <a href="http://stackoverflow.com/questions/tagged/python-asyncio?sort=votes&amp;pageSize=50">Stack Overflow</a> üzerinde ise çok fazla soru yok  (Örneğin "twisted" için 2.5K üzeri soru sorulmuş). <a href="http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html">Burada</a>, <a href="http://www.snarky.ca/how-the-heck-does-async-await-work-in-python-3-5">Şurada</a> ve <a href="http://sahandsaba.com/understanding-asyncio-node-js-python-3-4.html">Şurada</a> asyncio hakkında güzel blog yazıları var hatta belki de <a href="https://community.nitrous.io/tutorials/asynchronous-programming-with-python-3">Şu</a>, ve <a href="https://compiletoi.net/fast-scraping-in-python-with-asyncio/">Şu</a> da eklenmeli.</p>
+
+
+    <p>İşleri kolaylaştırmak için basit olandan başlayıp basit bir "Hello World" örneği ile GET isteği yapıp tek bir HTTP yanıtını işleyelim. Senkron programlamada sadece şu şekilde yaparsınız;</p>
+
+    <pre><code class="python">
+      import requests
+      def merhaba()
+          return requests.get("http://httpbin.org/get")
+      print(merhaba())
+    </code></pre>
+
+    <p>Peki bu aiohttp ile nasıl olur?</p>
+
+    <pre><code class="python">
+    #!/usr/local/bin/python3.5
+    import asyncio
+    from aiohttp import ClientSession
+
+    async def hello():
+        async with ClientSession() as session:
+            async with session.get("http://httpbin.org/headers") as response:
+                response = await response.read()
+                print(response)
+
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(hello())
+    </code></pre>
+
+    <p>Hmm böyle temel bir görev için çok fazla kod yazmak gerekiyor gibi.. Burada “async def”, “async with”, “await” var. İlk başta karmaşık gibi görünebilir, haydi açıklamaya çalışalım.</p>
+
+    <p>....</p>
+
+
+    <p>
+      <strong>
+        <a href="http://pawelmhm.github.io/asyncio/python/aiohttp/2016/04/22/asyncio-aiohttp.html">
+        Çeviri : "Making 1 million requests with python-aiohttp", Paweł Miech, 2016
+        </a>
+      </strong>
+    </p>
+
+  </div>
+
+    <footer>
+	  <small><a href="https://mehmetkose.github.io">2016</a></small> <br />
+    <small><a href="https://mehmetkose.github.io">mehmet köse</a></small>
+  </footer>
+  
+<script src="https://highlightjs.org/static/highlight.pack.js"></script>
+</body>
+</html>
