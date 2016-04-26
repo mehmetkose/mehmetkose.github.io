@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>aiohttp ile 1 milyon istek yapmak</title>
+    <title>aiohttp ile 1 milyon istek yapmak (çeviri)</title>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css' async> 
     <style>
     *{margin:0;padding:0;}
@@ -53,7 +53,7 @@
       "@context": "http://schema.org",
       "@type": "Article",
       "keywords": "tornado, python, background jobs",
-      "name": "aiohttp ile 1 milyon istek yapmak",
+      "name": "aiohttp ile 1 milyon istek yapmak (çeviri)",
       "creator": {
         "name": "Mehmet Köse",
         "url": "http://mehmetkose.github.io",
@@ -64,7 +64,18 @@
 <body>
   
   <div id="blog">
-    <h1>aiohttp ile 1 milyon istek yapmak</h1>
+    <h1>aiohttp ile 1 milyon istek yapmak (çeviri)</h1>
+
+
+    <p>
+      <strong>
+      <small>
+        <a href="http://pawelmhm.github.io/asyncio/python/aiohttp/2016/04/22/asyncio-aiohttp.html">
+        Kaynak : "Making 1 million requests with python-aiohttp", Paweł Miech, 2016
+        </a>
+      </small>
+      </strong>
+    </p>
 
     <p>Bu yazıda Python aiohttp'nin sınırlarını test etmek ve dakikalık istek performansını kontrol etmek istiyorum. Herkes, asenkron kodun network işlerinde kullanıldığında daha iyi performans gösterdiğini bilir, fakat bu varsayımın tam olarak nasıl ve neden bu kadar iyi olduğunu kontrol etmek hala ilgi çekici. Python aiohttp ile bir milyon istek yaparak bunu kontrol edeceğim. Dakikada kaç istek yapacak? Basit bir script komut ile bunu yapmaya çalıştığımda ne tarz çökme ve hatalar beklemeliyim? Böyle bir yoğunlukta istek yapmaya çalışırken düşünülmesi gereken ana başlıklar nelerdir?</p>
 
@@ -89,28 +100,30 @@
     import asyncio
     from aiohttp import ClientSession
 
-    async def hello():
+    async def merhaba():
         async with ClientSession() as session:
             async with session.get("http://httpbin.org/headers") as response:
                 response = await response.read()
                 print(response)
 
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(hello())
+    loop.run_until_complete(merhaba())
     </code></pre>
 
     <p>Hmm böyle temel bir görev için çok fazla kod yazmak gerekiyor gibi.. Burada “async def”, “async with”, “await” var. İlk başta karmaşık gibi görünebilir, haydi açıklamaya çalışalım.</p>
 
-    <p>....</p>
+    <p><a href="https://www.python.org/dev/peps/pep-0492/#await-expression">async</a> deyimini fonksiyon deyiminden önce kullanarak ve fonksiyon içerisinde await kullanarak bir fonksiyonu asenkron hale getirirsiniz. Aslında merhaba() işlevi çalışırken iki asenkron operasyon gerçekleşir. Önce asenkron olarak yanıt getirilir, sonra asenkron olarak yanıt gövdesi okunur.</p>
+
+    <p>Aiohttp, istekler yapmak için birincil arabirim olarak ClientSession metodunu önerir. ClientSession iki istek arasındaki çerezleri saklayabilme imkanı verir ve tüm istekler için ortak olan nesneleri tutar (event loop, bağlantı ve diğer şeyler). Session kullanıldıktan sonra kapatılması gerekir ve oturum kapamak bir başka asenkron işlemdir. Bu yüzden async deyimine ihtiyacınız var ve her seferinde session'lar ile uğraşmanızın nedeni bu.</p>
+
+    <p>client session açtıktan sonra bunları istek yapmak üzere kullanabilirsiniz. Burası isteği indiren asenkron operasyonun başladığı yerdir. Client session'ların yanıtı durumunda olduğu gibi açıkca kapatılması gerekir ve bağlam yöneticisi olan <strong>with</strong> her koşulda düzgün kapatılmasını sağlar.</p>
+
+    <p>Programı başlatmak için event loop (olay döngüsü)'nü çalıştırmanız gerekir ve bunu yapmak için asyncio instance'ı yaratmanız ve bu döngünün içine görevi koymanız gerekir. </p>
+
+    <p>Tüm bunlar biraz zor geliyor olabilir fakat anlamaya çalışırken biraz zaman harcamak mantıklı görünüyor.</p>
 
 
-    <p>
-      <strong>
-        <a href="http://pawelmhm.github.io/asyncio/python/aiohttp/2016/04/22/asyncio-aiohttp.html">
-        Çeviri : "Making 1 million requests with python-aiohttp", Paweł Miech, 2016
-        </a>
-      </strong>
-    </p>
+    
 
   </div>
 
