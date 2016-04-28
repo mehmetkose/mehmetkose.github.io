@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta isim="viewport" content="width=device-width, initial-scale=1"/>
     <title>aiohttp ile 1 milyon asenkron istek yapmak (çeviri)</title>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css' async> 
     <style>
@@ -48,14 +48,34 @@
     }
     
     </style>
+
+
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="aiohttp ile 1 milyon asenkron istek yapmak (çeviri)" />
+    <meta property="og:description" content="Bu yazıda Python aiohttp'nin sınırlarını test etmek ve dakikalık istek performansını kontrol etmek istiyorum. Herkes, asenkron kodun network işlerinde kullanıldığında daha iyi performans gösterdiğini bilir, fakat bu varsayımın tam olarak nasıl ve neden bu kadar iyi olduğunu kontrol etmek hala ilgi çekici. Python aiohttp ile bir milyon istek yaparak bunu kontrol edeceğim. Dakikada kaç istek yapacak? Basit bir script komut ile bunu yapmaya çalıştığımda ne tarz çökme ve hatalar beklemeliyim? Böyle bir yoğunlukta istek yapmaya çalışırken düşünülmesi gereken ana başlıklar nelerdir?" />
+    <meta property="og:url" content="http://mehmetkose.github.io/aiohttp-ile-1-milyon-asenkron-istek-yapmak.html" />
+    <meta property="og:site_name" content="Mehmet Köse" />
+    <meta property="article:tag" content="Asenkron" />
+    <meta property="article:tag" content="Python" />
+    <meta property="article:tag" content="Asyncio" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="Bu yazıda Python aiohttp'nin sınırlarını test etmek ve dakikalık istek performansını kontrol etmek istiyorum. Herkes, asenkron kodun network işlerinde kullanıldığında daha iyi performans gösterdiğini bilir, fakat bu varsayımın tam olarak nasıl ve neden bu kadar iyi olduğunu kontrol etmek hala ilgi çekici. Python aiohttp ile bir milyon istek yaparak bunu kontrol edeceğim. Dakikada kaç istek yapacak? Basit bir script komut ile bunu yapmaya çalıştığımda ne tarz çökme ve hatalar beklemeliyim? Böyle bir yoğunlukta istek yapmaya çalışırken düşünülmesi gereken ana başlıklar nelerdir?" />
+    <meta name="twitter:title" content="aiohttp ile 1 milyon asenkron istek yapmak (çeviri)" />
+    <meta name="twitter:site" content="@mehmetkose" />
+    <meta name="twitter:image" content="http://mehmetkose.github.io/img/mehmetkose.png" />
+    <meta name="twitter:creator" content="@mehmetkose" />
+
+
     <script type="application/ld+json">
     {
       "@context": "http://schema.org",
       "@type": "Article",
       "keywords": "python 3.5, asenkron programlama, aiohttp",
-      "name": "aiohttp ile 1 milyon asenkron istek yapmak (çeviri)",
+      "isim": "aiohttp ile 1 milyon asenkron istek yapmak (çeviri)",
       "creator": {
-        "name": "Mehmet Köse",
+        "isim": "Mehmet Köse",
         "url": "http://mehmetkose.github.io",
       }
     }
@@ -70,7 +90,7 @@
 
     <h2>Merhaba asyncio/aiohttp</h2>
     
-    <p>Async programlama kolay değildir. Kolay değildir çünkü callback'ler kullanır, olayların şartlarını ve olay işleyicilerini düşünmek normal programlamadan çok daha fazla efor gerektirir. Ayrıca bu biraz farklı çünkü asyncio hala nispeten yeni ve bu konuyla alakalı sadece birkaç blog gönderisi ve eğitim var. Konuyla alakalı resmi Python Belgeleri ise çok yoğun anlatımlı ve sadece basit örnekleri içeriyor. <a href="http://stackoverflow.com/questions/tagged/python-asyncio?sort=votes&amp;pageSize=50">Stack Overflow</a> üzerinde ise çok fazla soru yok  (Örneğin "twisted" için 2.5K üzeri soru sorulmuş). <a href="http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html">Burada</a>, <a href="http://www.snarky.ca/how-the-heck-does-async-await-work-in-python-3-5">Şurada</a> ve <a href="http://sahandsaba.com/understanding-asyncio-node-js-python-3-4.html">Şurada</a> asyncio hakkında güzel blog yazıları var hatta belki de <a href="https://community.nitrous.io/tutorials/asynchronous-programming-with-python-3">Şu</a>, ve <a href="https://compiletoi.net/fast-scraping-in-python-with-asyncio/">Şu</a> da eklenmeli.</p>
+    <p>Asenkron programlama kolay değildir. Kolay değildir çünkü callback'ler kullanır, olayların şartlarını ve olay işleyicilerini düşünmek normal programlamadan çok daha fazla efor gerektirir. Ayrıca bu biraz farklı çünkü asyncio hala nispeten yeni ve bu konuyla alakalı sadece birkaç blog gönderisi ve eğitim var. Konuyla alakalı resmi Python Belgeleri ise çok yoğun anlatımlı ve sadece basit örnekleri içeriyor. <strong><a href="http://stackoverflow.com/questions/tagged/python-asyncio?sort=votes&amp;pageSize=50">Stack Overflow</a></strong> üzerinde ise çok fazla soru yok. <strong><a href="http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html">Burada</a></strong>, <strong><a href="http://www.snarky.ca/how-the-heck-does-async-await-work-in-python-3-5">Şurada</a></strong> ve <strong><a href="http://sahandsaba.com/understanding-asyncio-node-js-python-3-4.html">Şurada</a></strong> asyncio hakkında güzel blog yazıları var hatta belki de <strong><a href="https://community.nitrous.io/tutorials/asynchronous-programming-with-python-3">Şu</a></strong>, ve <strong><a href="https://compiletoi.net/fast-scraping-in-python-with-asyncio/">Şu</a></strong> da eklenmeli.</p>
 
 
     <p>İşleri kolaylaştırmak için basit olandan başlayıp bir "Merhaba Dünya" örneği ile GET isteği yapıp tek bir HTTP yanıtını işleyelim. Senkron programlamada sadece şu şekilde yaparsınız;</p>
@@ -101,7 +121,7 @@
 
     <p>Hmm böyle temel bir görev için çok fazla kod yazmak gerekiyor gibi.. Burada “async def”, “async with”, “await” var. İlk başta karmaşık gibi görünebilir, haydi açıklamaya çalışalım.</p>
 
-    <p><a href="https://www.python.org/dev/peps/pep-0492/#await-expression">async</a> deyimini fonksiyon tanımlarken kullandığımız <strong>def</strong> deyiminden önce kullanarak ve fonksiyon içerisinde <strong>await</strong> kullanarak bir fonksiyonu asenkron hale getirirsiniz. Aslında merhaba() işlevi çalışırken iki asenkron operasyon gerçekleşir. Önce asenkron olarak yanıt getirilir, sonra asenkron olarak yanıt gövdesi okunur.</p>
+    <p><strong><a href="https://www.python.org/dev/peps/pep-0492/#await-expression">async</a></strong> deyimini fonksiyon tanımlarken kullandığımız <strong>def</strong> deyiminden önce kullanarak ve fonksiyon içerisinde <strong>await</strong> kullanarak bir fonksiyonu asenkron hale getirirsiniz. Aslında merhaba() işlevi çalışırken iki asenkron operasyon gerçekleşir. Önce asenkron olarak yanıt getirilir, sonra asenkron olarak yanıt gövdesi okunur.</p>
 
     <p>Aiohttp, istekler yapmak için birincil arabirim olarak ClientSession metodunu önerir. ClientSession iki istek arasındaki çerezleri saklayabilme imkanı verir ve tüm istekler için ortak olan nesneleri tutar (event loop, bağlantı ve diğer şeyler). Session'ın kullanıldıktan sonra kapatılması gerekir ve oturum kapamak bir başka asenkron işlemdir. Bu yüzden async deyimine ihtiyacınız var ve her seferinde session'lar ile uğraşmanızın nedeni bu.</p>
 
@@ -165,7 +185,7 @@
       loop.run_until_complete(future)
     </code></pre>
 
-    <p><a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.gather">asyncio.gather()</a>, Future nesnelerini bir yerde toplar ve hepsi bitinceye kadar bekler.</p>
+    <p><strong><a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.gather">asyncio.gather()</a></strong>, Future nesnelerini bir yerde toplar ve hepsi bitinceye kadar bekler.</p>
 
 
     <h2>Genel Hatalar</h2>
@@ -256,17 +276,178 @@
     <p>Benim hatalar hakkındaki tahminim, eğer bir şeyler bekliyorsanız her zaman <strong>await</strong> kullanımını hatırlayın.</p>
 
 
+    <h2>Senkron ve Asenkron</h2>
+
+    <p>Nihayet biraz eğlence vakti. Haydi asenkronun gerçekten zor olup olmadığına bakalım. <strong>Asenkron</strong> ve <strong>bloklanan</strong> istemci arasındaki verimlilik farkı nedir? Asenkron istemcimden dakikada kaç istek yapabilirim? Kafamdaki bu sorular ile kendi aiohttp sunucumu kuracağım. Benim sunucum Marry Shelley'nin Frankenstein'ına ait tüm html belgesini okuyacak. Yanıtlar arasında rasgele gecikme süreleri oluşacak. Bu örnek gerçek hayattaki gibi olmalı, yanıt süreleri genellikle birbirinden farklıdır.</p>
+
+    <p>Sunucu kodu aşağıdaki gibi;</p>
+    <pre><code>
+        #!/usr/local/bin/python3.5
+        import asyncio
+        from datetime import datetime
+        from aiohttp import web
+        import random
+
+        random.seed(1)
+
+        async def hello(request):
+            isim = request.match_info.get("isim", "foo")
+            n = datetime.now().isoformat()
+            gecikme = random.randint(0, 3)
+            await asyncio.sleep(gecikme)
+            headers = {"content_type": "text/html", "gecikme": str(gecikme)}
+            # burada dosyayı senkron olarak açıyorum. performansı iyileştirmek
+            # için asyncio Executor'lerini kullanabilirsiniz.
+            # https://docs.python.org/3/library/asyncio-eventloop.html#executor
+            # https://pymotw.com/3/asyncio/executors.html
+            with open("frank.html", "rb") as html_body:
+                print("{}: {} gecikme: {}".format(n, request.path, gecikme))
+                response = web.Response(body=html_body.read(), headers=headers)
+            return response
+
+        app = web.Application()
+        app.router.add_route("GET", "/{isim}", hello)
+        web.run_app(app)
+    </code></pre>
+
+    <p>Senkron kod ise şu şekilde;</p>
+    <pre><code>
+        import requests
+        r = 100
+
+        url = "http://localhost:8080/{}"
+        for i in range(r):
+            res = requests.get(url.format(i))
+            delay = res.headers.get("DELAY")
+            d = res.headers.get("DATE")
+            print("{}:{} delay {}".format(d, res.url, delay))
+    </code></pre>
+
+    <p>Çalışması ne kadar sürüyor? Benim bilgisayarımda senkron olarak çalışması 2:45.54 dakika aldı.</p>
+    <p>Aynı işlemi yapan asenkron kodum ise 0:03.48 dakika aldı.</p>
+
+    <p>Eğer ekrana yazdırılan sürelere bakarsanız asenkron istemcinin nasıl harika çalıştığını görürsünüz. Bazen 0 gecikme yaşanmış fakat bazen 3 saniye gecikme yaşanmış. Senkron kodda bunlar bloklanma ve bekleme sebebidir. Bu da makinanızın basitce boşta kalması anlamına geliyor. Asenkron kod hiç vakit kaybetmiyor. İstekler yapılır ve yanıtlar ayrıca işlenir. Açıkca görebilirsiniz ki, ilk istekler 0 gecikmelidir, sonraki yanıtlar ise 1 saniye gecikme ile en gecikmiş tepkiler gelene kadar görülebildi.</p>
+
+    <h2>Sınırları Zorlamak</h2>
+    <p>Şimdi bizim async client'ın daha iyi olduğunu biliyoruz. Haydi onun sınırlarını zorlayalım ve çökertmeyi deneyelim. Şimdi ona 1K istek yollayacağım. Kaçını işleyebilecek merak ediyorum.</p>
+
+    <pre><code>
+        > time python3 bench.py
+
+        2.68user 0.24system 0:07.14elapsed 40%CPU (0avgtext+0avgdata 53704maxresident)k
+        0inputs+0outputs (0major+14156minor)pagefaults 0swaps
+    </code></pre>
+
+    <p>1K istek 7 saniye aldı, harika. Peki ya 10K? 10K istek yapmayı deniyorum fakat ne yazık ki hata alıyorum.</p>
+
+    <pre><code>
+        responses are <_GatheringFuture finished exception=ClientOSError(24, 'Cannot connect to host localhost:8080 ssl:False [Can not connect to localhost:8080 [Too many open files]]')>
+        Traceback (most recent call last):
+          File "/home/pawel/.local/lib/python3.5/site-packages/aiohttp/connector.py", line 581, in _create_connection
+          File "/usr/local/lib/python3.5/asyncio/base_events.py", line 651, in create_connection
+          File "/usr/local/lib/python3.5/asyncio/base_events.py", line 618, in create_connection
+          File "/usr/local/lib/python3.5/socket.py", line 134, in __init__
+        OSError: [Errno 24] Too many open files
+    </code></pre>
+
+    <p>Kötü oldu. <strong><a href="http://www.webcitation.org/6ICibHuyd">C10K</a></strong> problemine takıldım gibi görünüyor.</p>
+
+    <p>“too many open files” dediği şey muhtemelen açık socket sayısına işaret ediyor. Neden dosya çağırıyor ki? Soketler sadece dosya tanımlayıcılarıdır. İşletim sistemleri açık socket sayısını kısıtlar. Kaç dosya <strong><i>"too many"</i></strong>? Ben Python kaynakları ile test ettiğimde 1024 civarı olduğunu gördüm. Peki bunu nasıl aşabiliriz? İlkel yol açık dosya sayısını kısıtlamaktır. Fakat bu muhtemelen iyi bir yol değil. Yapılan eşzamanlı istek sayısını kısıtlarsak muhtemelen bu daha iyi bir yol olur. Görev sayısını 1000 ile sınırlamak için koda asyncio.Semaphore() ekleyeceğim.</p>
+
+    <p>Düzenlediğim kod şimdi böyle görünüyor;</p>
+
+    <pre><code>
+        import random
+        import asyncio
+        from aiohttp import ClientSession
+
+        async def fetch(url):
+            async with ClientSession() as session:
+                async with session.get(url) as response:
+                    delay = response.headers.get("DELAY")
+                    date = response.headers.get("DATE")
+                    print("{}:{} with delay {}".format(date, response.url, delay))
+                    return await response.read()
+
+
+        async def bound_fetch(sem, url):
+            # getter function with semaphore
+            async with sem:
+                await fetch(url)
+
+
+        async def run(loop,  r):
+            url = "http://localhost:8080/{}"
+            tasks = []
+            # create instance of Semaphore
+            sem = asyncio.Semaphore(1000)
+            for i in range(r):
+                # pass Semaphore to every GET request
+                task = asyncio.ensure_future(bound_fetch(sem, url.format(i)))
+                tasks.append(task)
+
+            responses = asyncio.gather(*tasks)
+            await responses
+
+        number = 10000
+        loop = asyncio.get_event_loop()
+
+        future = asyncio.ensure_future(run(loop, number))
+        loop.run_until_complete(future)
+    </code></pre>
+
+    <p>Bu noktada ben 10k url işleyebiliyorum ve 23 saniye alıyor.</p>
+
+    <p>Peki ya 100.000? Bunun için bilgisayarım gerçekten zorlanacak fakat şaşırtıcı şekilde çalışıyor. Ram kullanımı yüksek ve CPU 100% civarında çalışıyor. İlginç olan şey ise istemci tarafında çok daha az tüketilmesi. Aşağıda <strong>ps</strong> çıktısı var;</p>
+
+    <pre><code>
+        pawel@pawel-VPCEH390X ~/p/l/benchmarker> ps ua | grep python
+
+        USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+        pawel     2447 56.3  1.0 216124 64976 pts/9    Sl+  21:26   1:27 /usr/local/bin/python3.5 ./test_server.py
+        pawel     2527  101  3.5 674732 212076 pts/0   Rl+  21:26   2:30 /usr/local/bin/python3.5 ./bench.py
+    </code></pre>
+
+    <p>Bazı nedenlerden dolayı bozulmadan önce 5 dakika kadar çalıştı. Bazı yanıtlar kapatılmamış gibi görünüyor, benim server kodunda veya istemci kodunda bir hata olmuş olabilir mi?</p>
+
+    <p>Biraz scroll'ladıktan sonra client log'larında şu exception'ı buluyorum.</p>
+
+    <pre><code>
+        File "/usr/local/lib/python3.5/asyncio/futures.py", line 387, in __iter__
+            return self.result()  # May raise too.
+          File "/usr/local/lib/python3.5/asyncio/futures.py", line 274, in result
+            raise self._exception
+          File "/usr/local/lib/python3.5/asyncio/selector_events.py", line 411, in _sock_connect
+            sock.connect(address)
+        OSError: [Errno 99] Cannot assign requested address
+    </code></pre>
+
+    <p>Burada ne olmuş gerçekten bilmiyorum. İlk hipotezim test server'ımın bir anlığına düşmüş olduğu yönünde. Bir okuyucu bunun işletim sistemi tarafından kaynaklandığını <strong><a href="https://news.ycombinator.com/item?id=11557672">düşünüyor</a></strong>. Ben semaphore'u önce ekledim ki eşzamanlı bağlantı sayısı maximum 1000 olsun, fakat bazı soketler belki de hala kapalı ve kernel üzerinde atama için kullanılamıyor.</p>
+
+    <p>Aslında tüm bunlar çok kötü değil. 5 dakika için 100K istek? dakikada 20K istek bana sorarsanız çok güçlü.</p>
+
+    <p>Nihayet ben 1 milyon istek yapmayı deniyorum. 52 dakikada tamamlanıyor.</p>
+
+    <pre><code>
+        1913.06user 1196.09system 52:06.87elapsed 99%CPU (0avgtext+0avgdata 5194260maxresident)k
+        265144inputs+0outputs (18692major+2528207minor)pagefaults 0swaps
+    </code></pre>
+
+    <p>Bu da benim istemcim dakikada 19230 istek yapıyor manasına geliyor. Kötü değil değil mi? Client'ın yeteneklerinin 0 ve 1 saniye gecikme süresi arasında sınırlı olduğunu unutmayın. Ayrıca test server'ı sessizce birkaç kere patlamış görünüyor.</p>
+
+    <h2>Sonuç</h2>
+    <p>Gördüğünüz gibi asenkron HTTP istemcileri süper güçlü. Asenkron istemci için istek sayısının 1 milyon olmasının bir önemi yok. Ve işini gayet iyi yapıyor. </p>
+
+    <p>Ben diğer diller ve frameworkler ile karşılaştırmalar nasıl sonuç verir merak ediyorum. Belki de yakın zamanda Twisted Treq ile aiohttp'yi test edip bir blog post yayınlarım. Burada sorulan sorular diğer diller ve frameworkler için de sorulabilir. Örneğin, Javadaki asenkron frameworklerinin performans sonuçları nasıldır? veya C++ frameworklerinde? veya Rust HTTP istemcilerinde?</p>
 
 
 
     <p>
-      <strong>
       <small>
-        <a href="http://pawelmhm.github.io/asyncio/python/aiohttp/2016/04/22/asyncio-aiohttp.html">
+        <strong><a href="http://pawelmhm.github.io/asyncio/python/aiohttp/2016/04/22/asyncio-aiohttp.html">
         Kaynak : "Making 1 million requests with python-aiohttp", Paweł Miech, 2016
-        </a>
+        </a></strong>
       </small>
-      </strong>
     </p>
 
     
@@ -274,8 +455,8 @@
   </div>
 
     <footer>
-    <small><a href="https://mehmetkose.github.io">2016</a></small> <br />
-    <small><a href="https://mehmetkose.github.io">mehmet köse</a></small>
+    <small><strong><a href="https://mehmetkose.github.io">2016</a></strong></small> <br />
+    <small><strong><a href="https://mehmetkose.github.io">mehmet köse</a></strong></small>
   </footer>
   
 <script src="https://highlightjs.org/static/highlight.pack.js"></script>
