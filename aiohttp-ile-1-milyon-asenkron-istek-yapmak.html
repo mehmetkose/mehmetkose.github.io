@@ -52,7 +52,7 @@
     {
       "@context": "http://schema.org",
       "@type": "Article",
-      "keywords": "tornado, python, background jobs",
+      "keywords": "python 3.5, asenkron programlama, aiohttp",
       "name": "aiohttp ile 1 milyon asenkron istek yapmak (çeviri)",
       "creator": {
         "name": "Mehmet Köse",
@@ -66,17 +66,6 @@
   <div id="blog">
     <h1>aiohttp ile 1 milyon asenkron istek yapmak (çeviri)</h1>
 
-
-    <p>
-      <strong>
-      <small>
-        <a href="http://pawelmhm.github.io/asyncio/python/aiohttp/2016/04/22/asyncio-aiohttp.html">
-        Kaynak : "Making 1 million requests with python-aiohttp", Paweł Miech, 2016
-        </a>
-      </small>
-      </strong>
-    </p>
-
     <p>Bu yazıda Python aiohttp'nin sınırlarını test etmek ve dakikalık istek performansını kontrol etmek istiyorum. Herkes, asenkron kodun network işlerinde kullanıldığında daha iyi performans gösterdiğini bilir, fakat bu varsayımın tam olarak nasıl ve neden bu kadar iyi olduğunu kontrol etmek hala ilgi çekici. Python aiohttp ile bir milyon istek yaparak bunu kontrol edeceğim. Dakikada kaç istek yapacak? Basit bir script komut ile bunu yapmaya çalıştığımda ne tarz çökme ve hatalar beklemeliyim? Böyle bir yoğunlukta istek yapmaya çalışırken düşünülmesi gereken ana başlıklar nelerdir?</p>
 
     <h2>Merhaba asyncio/aiohttp</h2>
@@ -84,7 +73,7 @@
     <p>Async programlama kolay değildir. Kolay değildir çünkü callback'ler kullanır, olayların şartlarını ve olay işleyicilerini düşünmek normal programlamadan çok daha fazla efor gerektirir. Ayrıca bu biraz farklı çünkü asyncio hala nispeten yeni ve bu konuyla alakalı sadece birkaç blog gönderisi ve eğitim var. Konuyla alakalı resmi Python Belgeleri ise çok yoğun anlatımlı ve sadece basit örnekleri içeriyor. <a href="http://stackoverflow.com/questions/tagged/python-asyncio?sort=votes&amp;pageSize=50">Stack Overflow</a> üzerinde ise çok fazla soru yok  (Örneğin "twisted" için 2.5K üzeri soru sorulmuş). <a href="http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html">Burada</a>, <a href="http://www.snarky.ca/how-the-heck-does-async-await-work-in-python-3-5">Şurada</a> ve <a href="http://sahandsaba.com/understanding-asyncio-node-js-python-3-4.html">Şurada</a> asyncio hakkında güzel blog yazıları var hatta belki de <a href="https://community.nitrous.io/tutorials/asynchronous-programming-with-python-3">Şu</a>, ve <a href="https://compiletoi.net/fast-scraping-in-python-with-asyncio/">Şu</a> da eklenmeli.</p>
 
 
-    <p>İşleri kolaylaştırmak için basit olandan başlayıp basit bir "Hello World" örneği ile GET isteği yapıp tek bir HTTP yanıtını işleyelim. Senkron programlamada sadece şu şekilde yaparsınız;</p>
+    <p>İşleri kolaylaştırmak için basit olandan başlayıp bir "Merhaba Dünya" örneği ile GET isteği yapıp tek bir HTTP yanıtını işleyelim. Senkron programlamada sadece şu şekilde yaparsınız;</p>
 
     <pre><code class="python">
       import requests
@@ -112,9 +101,9 @@
 
     <p>Hmm böyle temel bir görev için çok fazla kod yazmak gerekiyor gibi.. Burada “async def”, “async with”, “await” var. İlk başta karmaşık gibi görünebilir, haydi açıklamaya çalışalım.</p>
 
-    <p><a href="https://www.python.org/dev/peps/pep-0492/#await-expression">async</a> deyimini fonksiyon tanımlarken kullandığımız def deyiminden önce kullanarak ve fonksiyon içerisinde await kullanarak bir fonksiyonu asenkron hale getirirsiniz. Aslında merhaba() işlevi çalışırken iki asenkron operasyon gerçekleşir. Önce asenkron olarak yanıt getirilir, sonra asenkron olarak yanıt gövdesi okunur.</p>
+    <p><a href="https://www.python.org/dev/peps/pep-0492/#await-expression">async</a> deyimini fonksiyon tanımlarken kullandığımız <strong>def</strong> deyiminden önce kullanarak ve fonksiyon içerisinde <strong>await</strong> kullanarak bir fonksiyonu asenkron hale getirirsiniz. Aslında merhaba() işlevi çalışırken iki asenkron operasyon gerçekleşir. Önce asenkron olarak yanıt getirilir, sonra asenkron olarak yanıt gövdesi okunur.</p>
 
-    <p>Aiohttp, istekler yapmak için birincil arabirim olarak ClientSession metodunu önerir. ClientSession iki istek arasındaki çerezleri saklayabilme imkanı verir ve tüm istekler için ortak olan nesneleri tutar (event loop, bağlantı ve diğer şeyler). Session kullanıldıktan sonra kapatılması gerekir ve oturum kapamak bir başka asenkron işlemdir. Bu yüzden async deyimine ihtiyacınız var ve her seferinde session'lar ile uğraşmanızın nedeni bu.</p>
+    <p>Aiohttp, istekler yapmak için birincil arabirim olarak ClientSession metodunu önerir. ClientSession iki istek arasındaki çerezleri saklayabilme imkanı verir ve tüm istekler için ortak olan nesneleri tutar (event loop, bağlantı ve diğer şeyler). Session'ın kullanıldıktan sonra kapatılması gerekir ve oturum kapamak bir başka asenkron işlemdir. Bu yüzden async deyimine ihtiyacınız var ve her seferinde session'lar ile uğraşmanızın nedeni bu.</p>
 
     <p>client session açtıktan sonra bunları istek yapmak üzere kullanabilirsiniz. Burası isteği indiren asenkron operasyonun başladığı yerdir. Client session'ların yanıtı durumunda olduğu gibi açıkca kapatılması gerekir ve bağlam yöneticisi olan <strong>with</strong> her koşulda düzgün kapatılmasını sağlar.</p>
 
@@ -124,7 +113,7 @@
 
     <h2>Çoklu url getirmek</h2>
 
-    <p>Şimdi daha ilginç bir şey deneyelim ve birbirini takip eden isteklerle çoklu url getirelim. Senkron (Bildiğimiz normal çalışan) kod aşağıdaki gibi oluyor.</p>
+    <p>Şimdi daha ilginç bir şey deneyelim ve birbirini takip eden isteklerle çoklu urller getirelim. Senkron (Bildiğimiz normal çalışan) kod aşağıdaki gibi oluyor.</p>
 
     <pre><code>
     for url in urls:
@@ -139,12 +128,12 @@
       
       url = "http://httpbin.org/get"
       for i in range(5):
-          task = asyncio.ensure_future(hello(url.format(i)))
+          task = asyncio.ensure_future(merhaba(url.format(i)))
           tasks.append(task)
       loop.run_until_complete(asyncio.wait(tasks))
     </code></pre>
 
-    <p>Şimdi diyelim ki tüm yanıtları toplamak ve onlara bazı ön işlemler uygulamak istiyoruz. Şu an biz hiçbir yerde yanıt gövdesini tutmuyoruz, sadece ekrana basıyoruz. Haydi yanıt döndürelim ve en sonda hepsini basalım. </p>
+    <p>Şimdi diyelim ki tüm yanıtları toplamak ve onlara bazı ön işlemler uygulamak istiyoruz. Şu an biz hiçbir yerde yanıt gövdesini tutmuyoruz, sadece ekrana basıyoruz. Haydi yanıt olarak döndürelim ve en sonda hepsini basalım. </p>
 
     <p>Yanıtları bir gruba toparlamak için muhtemelen aşağıdaki gibi bir şey yapmak gerekir.</p>
 
@@ -176,13 +165,109 @@
       loop.run_until_complete(future)
     </code></pre>
 
-    <p><a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.gather">asyncio.gather(), Future nesnelerini bir yerde toplar ve hepsi bitinceye kadar bekler.</a></p>
+    <p><a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.gather">asyncio.gather()</a>, Future nesnelerini bir yerde toplar ve hepsi bitinceye kadar bekler.</p>
 
 
-    <!-- <h2>Ortak Yapılan Hatalar</h2>
+    <h2>Genel Hatalar</h2>
 
-    <p></p> -->
+    <p>Şimdi gerçek bir öğrenme sürecini simüle edelim ve bir hata yapalım, bu amaca uygun bir örnek görmek için yardımcı olabilir.</p>
 
+    <p>Bozuk bir asenkron fonksiyon aşağıdaki gibi görünebilir;</p>
+
+    <pre><code>
+      # Çalışmayan Asenkron Kodu
+      async def fetch(url):
+          async with ClientSession() as session:
+              async with session.get(url) as response:
+                  return response.read()
+    </code></pre>
+
+    <p>Bu kod bozuk ama asyncio hakkında pek bir şey bilmeden hatayı anlamaya çalışmak kolay değil. Python dilini iyi biliyor olsanız bile yeteri kadar asyncio ve aiohttp konularına hakim değilseniz burada gerçekte neler olduğunu anlamanız zor.</p>
+
+    <p>Bu fonksiyonun çıktısı nedir?</p>
+
+    <p>Fonksiyon bu çıktıyı üretiyor;</p>
+
+    <pre><code>
+      pawel@pawel-VPCEH390X ~/p/l/benchmarker> ./bench.py 
+      [&lt;generator object ClientResponse.read at 0x7fa68d465728>, &lt;generator object ClientResponse.read at 0x7fa68cdd9468>]
+    </code></pre>
+
+    <p>Burada ne oluyor? İşlemler bittiğinde yanıtlara ait objeleri bekliyorsunuz fakat burada <strong>Generator</strong> nesneleri var.</p>
+
+    <p>Bu bu şekilde oluyor çünkü önce de belirttiğim gibi response.read() bir asenkron operasyon. Bunun anlamı, sonucu hemen döndürmüyor, döndürdüğü şey sadece generator. Bu generator'lerin hala çağrılmaya ve çalıştırılmaya ihtiyacı var ve bu default olarak yapılmıyor. Python 3.4'de eklenen <strong>yield from</strong> ve Python 3.5'de eklenen <strong>await</strong> tam olarak bu amaçla geldi: Generator objesini iterate etmek için. Yukarıdaki hatayı düzeltmek için <strong>response.read()</strong> önüne <strong>await</strong> eklemek yeterli olacak.</p>
+
+    <pre><code>
+      return await response.read()
+    </code></pre>
+
+
+    <p>Haydi bu sefer de kodu bir başka yoldan bozalım.</p>
+    <pre><code>
+      #hatalı kod
+      async def run(loop,  r):
+      url = "http://httpbin.org/get"
+      tasks = []
+      for i in range(r):
+          task = asyncio.ensure_future(fetch(url.format(i)))
+          tasks.append(task)
+
+      responses = asyncio.gather(*tasks)
+      print(responses)
+    </code></pre>
+
+    <p>Dediğim gibi, yukarıdaki hatayı da asyncio bilmeden anlamak biraz zor olabilir.</p>
+    <p>Yukarıdaki işlemin çıktısı şu;</p>
+
+    <pre><code>
+      pawel@pawel-VPCEH390X ~/p/l/benchmarker> ./bench.py 
+      <_GatheringFuture pending>
+      
+      Task was destroyed but it is pending!
+      task: &lt;Task pending coro=&lt;fetch() running at ./bench.py:7> wait_for=&lt;Future pending 
+        cb=[Task._wakeup()]> cb=[gather.&lt;locals>._done_callback(0)() at /usr/local/lib/python3.5/asyncio/tasks.py:602]>
+      
+      Task was destroyed but it is pending!
+      task: &lt;Task pending coro=&lt;fetch() running at ./bench.py:7> wait_for=&lt;Future pending 
+        cb=[Task._wakeup()]> cb=[gather.&lt;locals>._done_callback(1)() at /usr/local/lib/python3.5/asyncio/tasks.py:602]>
+      
+      Task was destroyed but it is pending!
+      task: &lt;Task pending coro=&lt;fetch() running at ./bench.py:7> wait_for=&lt;Future pending 
+        cb=[Task._wakeup()]> cb=[gather.&lt;locals>._done_callback(2)() at /usr/local/lib/python3.5/asyncio/tasks.py:602]>
+      
+      Task was destroyed but it is pending!
+      task: &lt;Task pending coro=&lt;fetch() running at ./bench.py:7> wait_for=&lt;Future pending 
+        cb=[Task._wakeup()]> cb=[gather.&lt;locals>._done_callback(3)() at /usr/local/lib/python3.5/asyncio/tasks.py:602]>
+    </code></pre>
+
+
+    <p>Burada ne oldu? Karşı tarafın loglarına bakabilseydiniz aslında isteklerin onlara ulaşmadığını görürdünüz. Açıkcası hiçbir istek yapılmadı. Print deyimi <_GatheringFuture pending> objesini içeren bir değişkeni bastı. Daha sonra bekleyen görevler yok edildi ve bildirildi. Neden böyle oldu? Çünkü <strong>await</strong>'i yine unuttuk. </p>
+
+    <p>Hatalı kısım şuydu;</p>
+    <pre><code>
+            responses = asyncio.gather(*tasks)
+    </code></pre>
+
+    <p>Şöyle olmalı;</p>
+    <pre><code>
+            responses = await asyncio.gather(*tasks)
+    </code></pre>
+
+    <p>Benim hatalar hakkındaki tahminim, eğer bir şeyler bekliyorsanız her zaman <strong>await</strong> kullanımını hatırlayın.</p>
+
+
+
+
+
+    <p>
+      <strong>
+      <small>
+        <a href="http://pawelmhm.github.io/asyncio/python/aiohttp/2016/04/22/asyncio-aiohttp.html">
+        Kaynak : "Making 1 million requests with python-aiohttp", Paweł Miech, 2016
+        </a>
+      </small>
+      </strong>
+    </p>
 
     
 
