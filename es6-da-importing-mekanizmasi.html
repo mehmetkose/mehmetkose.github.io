@@ -49,7 +49,7 @@
     {
       "@context": "http://schema.org",
       "@type": "Article",
-      "keywords": "ecmascript 6'da importing mekanizması",
+      "keywords": "javascript, ecmascript 6, import, importing, içeri aktarma",
       "name": "ecmascript 6'da importing mekanizması",
       "creator": {
         "name": "Mehmet Köse",
@@ -64,7 +64,9 @@
 
     <h1>ecmascript 6'da importing mekanizması</h1>
 
-    <p>Bu yazı ecmascript 6'daki importing mekanizması ile alakalı temel bilgi içermektedir. Diyelim ki utils.js adında bir dosyanız var. Başka bir dosyada buradaki objeleri kullanmak istiyorsunuz. Yani bir şeyleri içeri aktaracağız.</p>
+    <p>Bu yazı ecmascript 6'daki <strong>importing</strong> mekanizması ile alakalı temel bilgi içermektedir. </p>
+
+    <p>Diyelim ki utils.js adında bir dosyanız var. Başka bir dosyada buradaki objeleri kullanmak istiyorsunuz. Yani bir şeyleri içeri aktaracağız.</p>
 
     <pre><code>
     //utils.js
@@ -79,14 +81,14 @@
 
     <p>Böylece dosya içerisindekindekileri almak için iki yönteme sahip oluyorsunuz.</p>
 
-    <p>İlki aşağıdaki gibi, modül olarak kullanabilirsiniz.</p>
+    <p>İlki aşağıdaki gibi, <strong>method</strong> olarak kullanabilirsiniz.</p>
 
     <pre><code>
       import araclarim from 'utils'
       araclarim.sunu_yap();
     </code></pre>
 
-    <p>Veya sadece ihtiyacınız olan fonksiyonu dahil edebilirsiniz.</p>
+    <p>Veya sadece ihtiyacınız olan fonksiyonu dahil edip kullanabilirsiniz.</p>
 
     <pre><code>
       import {sunu_yap} from 'utils'
@@ -98,10 +100,10 @@
     <pre><code>import {Link} from 'react-router'</code></pre>
 
 
-    <p>Ayrıca çoklu olarak objeleri getirmek de mümkün</p>
+    <p>Ayrıca fonksiyonları <strong>çoklu olarak</strong> getirmek de mümkün;</p>
 
     <pre><code>
-    import { sunu_yap, bunu_yap } from 'utils';
+      import { sunu_yap, bunu_yap } from 'utils';
     </code></pre>
     
     <p>Faydalı olduysa ne mutlu. Görüşmek Üzere.</p>
