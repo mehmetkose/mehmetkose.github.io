@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>ecmascript 6'da importing mekanizması</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css' async> 
+    <style>
+    *{margin:0;padding:0;}
+    body{text-align: center;background:#9bd6b8;color: #505664;}
+    #blog{width: 60%;margin:0 auto;}
+    #blog p{margin-top: 1em;}
+    h1{font-size: 3em;font-family: 'Pacifico',cursive;font-weight: 400;margin-top:7%;}
+    h2{font-size: 2em;font-family: 'Pacifico',cursive;font-weight: 400;margin-top:1%;}
+    a{color: #505664;text-decoration:none;}
+    ::selection {
+      background:#505664;
+      color:#9bd6b8;
+    }
+    ::-moz-selection {
+      background:#505664;
+      color:#9bd6b8;
+    }
+    p{
+      font-size: 1.1em;
+    }
+
+    ul{
+      list-style-type: none;
+    }
+
+    ul li:hover{
+      font-size:1.2em;
+      padding-bottom:0.1em;
+      -webkit-transition: all 0.4s ease;
+      -moz-transition: all 0.4s ease;
+      -o-transition: all 0.4s ease;
+      -ms-transition: all 0.4s ease;
+    }
+    footer{
+      margin-top: 6em;
+    }
+    pre{
+      text-align: left
+    }
+    
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "keywords": "ecmascript 6'da importing mekanizması",
+      "name": "ecmascript 6'da importing mekanizması",
+      "creator": {
+        "name": "Mehmet Köse",
+        "url": "http://mehmetkose.github.io",
+      }
+    }
+    </script>
+</head>
+<body>
+  
+  <div id="blog">
+
+    <h1>ecmascript 6'da importing mekanizması</h1>
+
+    <p>Bu yazı ecmascript 6'daki importing mekanizması ile alakalı temel bilgi içermektedir. Diyelim ki utils.js adında bir dosyanız var. Başka bir dosyada buradaki objeleri kullanmak istiyorsunuz. Yani bir şeyleri içeri aktaracağız.</p>
+
+    <pre><code>
+    //utils.js
+    export sunu_yap(){
+        console.log('şu');
+    }
+
+    export bunu_yap(){
+        console.log('bu');
+    }
+    </code></pre>
+
+    <p>Böylece dosya içerisindekindekileri almak için iki yönteme sahip oluyorsunuz.</p>
+
+    <p>İlki aşağıdaki gibi, modül olarak kullanabilirsiniz.</p>
+
+    <pre><code>
+      import araclarim from 'utils'
+      araclarim.sunu_yap();
+    </code></pre>
+
+    <p>Veya sadece ihtiyacınız olan fonksiyonu dahil edebilirsiniz.</p>
+
+    <pre><code>
+      import {sunu_yap} from 'utils'
+      sunu_yap();
+    </code></pre>
+
+    <p>Örneğin react-router içerisinden Link componentini şöyle alıyoruz;</p>
+
+    <pre><code>import {Link} from 'react-router'</code></pre>
+
+
+    <p>Ayrıca çoklu olarak objeleri getirmek de mümkün</p>
+
+    <pre><code>
+    import { sunu_yap, bunu_yap } from 'utils';
+    </code></pre>
+    
+    <p>Faydalı olduysa ne mutlu. Görüşmek Üzere.</p>
+
+  </div>
+
+  <footer>
+	  <small><a href="https://mehmetkose.github.io">2016</a></small> <br />
+    <small><a href="https://mehmetkose.github.io">mehmet köse</a></small>
+  </footer>
+<script src=" "></script>
+</body>
+</html>
