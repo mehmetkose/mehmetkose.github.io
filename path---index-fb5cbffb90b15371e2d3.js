@@ -1,0 +1,2 @@
+webpackJsonp([0x81b8806e4260],{"./node_modules/json-loader/index.js!./.cache/json/index.json":function(e,t){e.exports={data:{site:{siteMetadata:{title:"Mehmet Kose Blog"}},allMarkdownRemark:{edges:[{node:{excerpt:"Hello Everyone! Last 3 years was tough for me. This year seems will tough either.\nI’m the guy who want to try to survive and code in Turkey…",frontmatter:{path:"/blogging-again/",date:"24 September, 2017",title:"Blogging Again!"}}}]}},pathContext:{}}}});
+//# sourceMappingURL=path---index-fb5cbffb90b15371e2d3.js.map
