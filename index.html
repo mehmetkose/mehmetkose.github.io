@@ -1,20 +1,581 @@
-<!DOCTYPE html>
- <html><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="preload" href="/component---src-layouts-index-js-53d1c8e6202a05fdfd0b.js" as="script"/><link rel="preload" href="/component---src-pages-index-js-9d644bc326d62fc104d0.js" as="script"/><link rel="preload" href="/path---index-38e1ac5ea8d22e6c8ef9.js" as="script"/><link rel="preload" href="/app-9196972dc79747aba3ba.js" as="script"/><link rel="preload" href="/commons-d25f2f85baab9b2932d0.js" as="script"/><script id="webpack-manifest">
-            //<![CDATA[
-            window.webpackManifest = {"231608221292675":"app-9196972dc79747aba3ba.js","99219681209289":"component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js","107818501498521":"component---src-templates-blog-post-js-e80ac97d6d6053a0891c.js","35783957827783":"component---src-pages-index-js-9d644bc326d62fc104d0.js","60335399758886":"path----557518bd178906f8d58a.js","210333531512890":"path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js","218813103886677":"path---blogging-again-b0078a225f3cae147772.js","253926802604585":"path---hey-golang-show-me-what-you-got-c836b1342ae6e6024f7f.js","142629428675168":"path---index-38e1ac5ea8d22e6c8ef9.js","114276838955818":"component---src-layouts-index-js-53d1c8e6202a05fdfd0b.js"}
-            //]]>
-            </script><title data-react-helmet="true">Mehmet Kose Blog</title><style id="typography.js">html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:100%/1.75em 'Merriweather','Georgia',serif;box-sizing:border-box;overflow-y:scroll;}*{box-sizing:inherit;}*:before{box-sizing:inherit;}*:after{box-sizing:inherit;}body{color:hsla(0,0%,0%,0.9);font-family:'Merriweather','Georgia',serif;font-weight:400;word-wrap:break-word;font-kerning:normal;-moz-font-feature-settings:"kern", "liga", "clig", "calt";-ms-font-feature-settings:"kern", "liga", "clig", "calt";-webkit-font-feature-settings:"kern", "liga", "clig", "calt";font-feature-settings:"kern", "liga", "clig", "calt";}img{max-width:100%;margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}h1{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:Montserrat,sans-serif;font-weight:900;text-rendering:optimizeLegibility;font-size:2.5rem;line-height:1.1;}h2{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.73286rem;line-height:1.1;}h3{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1.4427rem;line-height:1.1;}h4{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:1rem;line-height:1.1;letter-spacing:0.140625em;text-transform:uppercase;}h5{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.83255rem;line-height:1.1;}h6{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;color:inherit;font-family:'Merriweather','Georgia',serif;font-weight:900;text-rendering:optimizeLegibility;font-size:0.75966rem;line-height:1.1;font-style:italic;}hgroup{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}ul{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;list-style:disc;}ol{margin-left:1.75rem;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;list-style-position:outside;list-style-image:none;}dl{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}dd{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}p{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}figure{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}pre{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:0.85rem;line-height:1.75rem;}table{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1rem;line-height:1.75rem;border-collapse:collapse;width:100%;}fieldset{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}blockquote{margin-left:-1.75rem;margin-right:1.75rem;margin-top:0;padding-bottom:0;padding-left:1.42188rem;padding-right:0;padding-top:0;margin-bottom:1.75rem;font-size:1.20112rem;line-height:1.75rem;color:hsla(0,0%,0%,0.59);font-style:italic;border-left:0.32813rem solid hsla(0,0%,0%,0.9);}form{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}noscript{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}iframe{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}hr{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:calc(1.75rem - 1px);background:hsla(0,0%,0%,0.2);border:none;height:1px;}address{margin-left:0;margin-right:0;margin-top:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;margin-bottom:1.75rem;}b{font-weight:700;}strong{font-weight:700;}dt{font-weight:700;}th{font-weight:700;}li{margin-bottom:calc(1.75rem / 2);}ol li{padding-left:0;}ul li{padding-left:0;}li > ol{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}li > ul{margin-left:1.75rem;margin-bottom:calc(1.75rem / 2);margin-top:calc(1.75rem / 2);}blockquote *:last-child{margin-bottom:0;}li *:last-child{margin-bottom:0;}p *:last-child{margin-bottom:0;}li > p{margin-bottom:calc(1.75rem / 2);}code{font-size:0.85rem;line-height:1.75rem;}kbd{font-size:0.85rem;line-height:1.75rem;}samp{font-size:0.85rem;line-height:1.75rem;}abbr{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}acronym{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;}abbr[title]{border-bottom:1px dotted hsla(0,0%,0%,0.5);cursor:help;text-decoration:none;}thead{text-align:left;}td,th{text-align:left;border-bottom:1px solid hsla(0,0%,0%,0.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding-left:1.16667rem;padding-right:1.16667rem;padding-top:0.875rem;padding-bottom:calc(0.875rem - 1px);}th:first-child,td:first-child{padding-left:0;}th:last-child,td:last-child{padding-right:0;}blockquote > :last-child{margin-bottom:0;}blockquote cite{font-size:1rem;line-height:1.75rem;color:hsla(0,0%,0%,0.9);font-weight:400;}blockquote cite:before{content:"— ";}ul,ol{margin-left:0;}@media only screen and (max-width:480px){ul,ol{margin-left:1.75rem;}blockquote{margin-left:-1.3125rem;margin-right:0;padding-left:0.98438rem;}}h1,h2,h3,h4,h5,h6{margin-top:3.5rem;}a{box-shadow:0 1px 0 0 currentColor;color:#007acc;text-decoration:none;}a:hover,a:active{box-shadow:none;}mark,ins{background:#007acc;color:white;padding:0.10938rem 0.21875rem;text-decoration:none;}</style><link href="//fonts.googleapis.com/css?family=Montserrat:700|Merriweather:400,400i,700,700i,900,900i" rel="stylesheet" type="text/css"/><script>
-  !function(e,t,r){function n(){for(;d[0]&&"loaded"==d[0][f];)c=d.shift(),c[o]=!i.parentNode.insertBefore(c,i)}for(var s,a,c,d=[],i=e.scripts[0],o="onreadystatechange",f="readyState";s=r.shift();)a=e.createElement(t),"async"in i?(a.async=!1,e.head.appendChild(a)):i[f]?(d.push(a),a[o]=n):e.write("<"+t+' src="'+s+'" defer></'+t+">"),a.src=s}(document,"script",[
-  "/commons-d25f2f85baab9b2932d0.js","/app-9196972dc79747aba3ba.js","/path---index-38e1ac5ea8d22e6c8ef9.js","/component---src-pages-index-js-9d644bc326d62fc104d0.js","/component---src-layouts-index-js-53d1c8e6202a05fdfd0b.js"
-])
-  </script><style id="gatsby-inlined-css">@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:100;src:local("Montserrat Thin "),local("Montserrat-Thin"),url(/static/montserrat-latin-100.50d27986.woff2) format("woff2"),url(/static/montserrat-latin-100.5e334eff.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:100;src:local("Montserrat Thin italic"),local("Montserrat-Thinitalic"),url(/static/montserrat-latin-100italic.8c070533.woff2) format("woff2"),url(/static/montserrat-latin-100italic.03e19243.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:200;src:local("Montserrat Extra Light "),local("Montserrat-Extra Light"),url(/static/montserrat-latin-200.4343d3d9.woff2) format("woff2"),url(/static/montserrat-latin-200.f2022ecd.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:200;src:local("Montserrat Extra Light italic"),local("Montserrat-Extra Lightitalic"),url(/static/montserrat-latin-200italic.116c4c4b.woff2) format("woff2"),url(/static/montserrat-latin-200italic.89614a60.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:300;src:local("Montserrat Light "),local("Montserrat-Light"),url(/static/montserrat-latin-300.d2ad295b.woff2) format("woff2"),url(/static/montserrat-latin-300.3a371ee0.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:300;src:local("Montserrat Light italic"),local("Montserrat-Lightitalic"),url(/static/montserrat-latin-300italic.f6b6bf24.woff2) format("woff2"),url(/static/montserrat-latin-300italic.16521668.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:400;src:local("Montserrat Regular "),local("Montserrat-Regular"),url(/static/montserrat-latin-400.240a8444.woff2) format("woff2"),url(/static/montserrat-latin-400.b20cc131.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:400;src:local("Montserrat Regular italic"),local("Montserrat-Regularitalic"),url(/static/montserrat-latin-400italic.86172bb8.woff2) format("woff2"),url(/static/montserrat-latin-400italic.9405e787.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500;src:local("Montserrat Medium "),local("Montserrat-Medium"),url(/static/montserrat-latin-500.fb8d6b71.woff2) format("woff2"),url(/static/montserrat-latin-500.50825d47.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:500;src:local("Montserrat Medium italic"),local("Montserrat-Mediumitalic"),url(/static/montserrat-latin-500italic.c0a555a4.woff2) format("woff2"),url(/static/montserrat-latin-500italic.635de59c.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600;src:local("Montserrat SemiBold "),local("Montserrat-SemiBold"),url(/static/montserrat-latin-600.d5615136.woff2) format("woff2"),url(/static/montserrat-latin-600.f300da4f.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:600;src:local("Montserrat SemiBold italic"),local("Montserrat-SemiBolditalic"),url(/static/montserrat-latin-600italic.10f29d13.woff2) format("woff2"),url(/static/montserrat-latin-600italic.2bc37d86.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:700;src:local("Montserrat Bold "),local("Montserrat-Bold"),url(/static/montserrat-latin-700.7d77e1f0.woff2) format("woff2"),url(/static/montserrat-latin-700.81826529.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:700;src:local("Montserrat Bold italic"),local("Montserrat-Bolditalic"),url(/static/montserrat-latin-700italic.1dd2b53f.woff2) format("woff2"),url(/static/montserrat-latin-700italic.c162d257.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:800;src:local("Montserrat ExtraBold "),local("Montserrat-ExtraBold"),url(/static/montserrat-latin-800.d4e7bf86.woff2) format("woff2"),url(/static/montserrat-latin-800.895aadbf.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:800;src:local("Montserrat ExtraBold italic"),local("Montserrat-ExtraBolditalic"),url(/static/montserrat-latin-800italic.fc0cbe44.woff2) format("woff2"),url(/static/montserrat-latin-800italic.b3362875.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:900;src:local("Montserrat Black "),local("Montserrat-Black"),url(/static/montserrat-latin-900.c8bdd772.woff2) format("woff2"),url(/static/montserrat-latin-900.1b99ef78.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:900;src:local("Montserrat Black italic"),local("Montserrat-Blackitalic"),url(/static/montserrat-latin-900italic.cb72c1f9.woff2) format("woff2"),url(/static/montserrat-latin-900italic.b78bb9f8.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:300;src:local("Merriweather Light "),local("Merriweather-Light"),url(/static/merriweather-latin-300.a8258cd1.woff2) format("woff2"),url(/static/merriweather-latin-300.f5838312.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:300;src:local("Merriweather Light italic"),local("Merriweather-Lightitalic"),url(/static/merriweather-latin-300italic.ff744a72.woff2) format("woff2"),url(/static/merriweather-latin-300italic.ebb3c5bd.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:400;src:local("Merriweather Regular "),local("Merriweather-Regular"),url(/static/merriweather-latin-400.41389797.woff2) format("woff2"),url(/static/merriweather-latin-400.fc0d5525.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:400;src:local("Merriweather Regular italic"),local("Merriweather-Regularitalic"),url(/static/merriweather-latin-400italic.e6bb2aaf.woff2) format("woff2"),url(/static/merriweather-latin-400italic.8df98251.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:700;src:local("Merriweather Bold "),local("Merriweather-Bold"),url(/static/merriweather-latin-700.7c4720f5.woff2) format("woff2"),url(/static/merriweather-latin-700.8081d883.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:700;src:local("Merriweather Bold italic"),local("Merriweather-Bolditalic"),url(/static/merriweather-latin-700italic.af53e7c6.woff2) format("woff2"),url(/static/merriweather-latin-700italic.c9addd1f.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:900;src:local("Merriweather Black "),local("Merriweather-Black"),url(/static/merriweather-latin-900.b64d6d00.woff2) format("woff2"),url(/static/merriweather-latin-900.3ca953c0.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:900;src:local("Merriweather Black italic"),local("Merriweather-Blackitalic"),url(/static/merriweather-latin-900italic.566e2de4.woff2) format("woff2"),url(/static/merriweather-latin-900italic.5156ebd3.woff) format("woff")}</style></head><body><div id="___gatsby"><div style="max-width:42rem;margin-left:auto;margin-right:auto;padding:2.625rem 1.3125rem;" data-reactroot="" data-reactid="1" data-react-checksum="1185233842"><h1 style="font-size:3.95285rem;line-height:4.375rem;margin-bottom:2.625rem;margin-top:0;" data-reactid="2"><a style="box-shadow:none;text-decoration:none;color:inherit;" href="/" data-reactid="3">Mehmet Kose</a></h1><div data-reactid="4"><!-- react-empty: 5 --><p style="margin-bottom:4.375rem;" data-reactid="6"><img src="/static/profile-pic.9dcbc9ee.jpg" alt="Mehmet Kose" style="float:left;margin-right:0.4375rem;margin-bottom:0;width:3.5rem;height:3.5rem;" data-reactid="7"/><!-- react-text: 8 -->Written by <!-- /react-text --><strong data-reactid="9">Mehmet Kose</strong><!-- react-text: 10 --> who lives and works in Turkey &amp; building useful things.<!-- /react-text --><!-- react-text: 11 --> <!-- /react-text --><a href="https://twitter.com/mehmetkose" target="_blank" data-reactid="12">Twitter</a><!-- react-text: 13 --> ~<!-- /react-text --><a href="https://github.com/mehmetkose" target="_blank" data-reactid="14">Github</a><!-- react-text: 15 --> ~<!-- /react-text --><a href="https://www.cakeresume.com/mehmetkose" target="_blank" data-reactid="16">Resume</a></p><div data-reactid="17"><h3 style="margin-bottom:0.4375rem;" data-reactid="18"><a style="box-shadow:none;" href="/hey-golang-show-me-what-you-got/" data-reactid="19">Hey Golang! Show Me What You Got</a></h3><small data-reactid="20">29 September, 2017</small><p data-reactid="21">Hackers.. we love trouble. As I mentioned earlier, I’m working on a SaaS project for a while.
-And I believe that If you want to learn some…</p></div><div data-reactid="22"><h3 style="margin-bottom:0.4375rem;" data-reactid="23"><a style="box-shadow:none;" href="/blogging-again/" data-reactid="24">Blogging Again!</a></h3><small data-reactid="25">24 September, 2017</small><p data-reactid="26">Hello Everyone! Last 3 years was tough for me. This year seems will tough either.
-I’m the guy who want to try to survive and code in Turkey…</p></div></div><span style="display:block;clear:both;" data-reactid="27"> </span></div></div><script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'undefined', 'auto');
-  ga('send', 'pageview');
-      </script></body></html>
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+  <meta charset='UTF-8'>
+  <title>Mehmet Köse - Frontend & Backend Developer</title>
+  <link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+  <link rel="canonical" href="https://mehmetkose.github.io" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel='stylesheet prefetch' href='/normalize.min.css'>
+<style class="cp-pen-styles">html {
+  box-sizing: border-box;
+  font-family: "ff-meta-serif-web-pro", serif;
+  color: #555;
+  font-size: 16px;
+}
+@media (min-width: 6.25em) {
+  html {
+    font-size: 17px;
+  }
+}
+@media (min-width: 12.5em) {
+  html {
+    font-size: 18px;
+  }
+}
+@media (min-width: 18.75em) {
+  html {
+    font-size: 19px;
+  }
+}
+@media (min-width: 25em) {
+  html {
+    font-size: 20px;
+  }
+}
+@media (min-width: 31.25em) {
+  html {
+    font-size: 21px;
+  }
+}
+@media (min-width: 37.5em) {
+  html {
+    font-size: 22px;
+  }
+}
+@media (min-width: 43.75em) {
+  html {
+    font-size: 23px;
+  }
+}
+@media (min-width: 50em) {
+  html {
+    font-size: 24px;
+  }
+}
+@media (min-width: 56.25em) {
+  html {
+    font-size: 25px;
+  }
+}
+@media (min-width: 62.5em) {
+  html {
+    font-size: 26px;
+  }
+}
+@media (min-width: 68.75em) {
+  html {
+    font-size: 27px;
+  }
+}
+@media (min-width: 75em) {
+  html {
+    font-size: 28px;
+  }
+}
+@media (min-width: 81.25em) {
+  html {
+    font-size: 29px;
+  }
+}
+@media (min-width: 87.5em) {
+  html {
+    font-size: 30px;
+  }
+}
+@media (min-width: 93.75em) {
+  html {
+    font-size: 31px;
+  }
+}
+@media (min-width: 100em) {
+  html {
+    font-size: 32px;
+  }
+}
+@media (min-width: 106.25em) {
+  html {
+    font-size: 33px;
+  }
+}
+@media (min-width: 112.5em) {
+  html {
+    font-size: 34px;
+  }
+}
+@media (min-width: 118.75em) {
+  html {
+    font-size: 35px;
+  }
+}
+@media (min-width: 125em) {
+  html {
+    font-size: 36px;
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/**
+ * The fixed Side 
+ */
+.side {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  width: 50px;
+  border-right: 1px dashed rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.5);
+  font-family: "nimbus-sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .0875rem;
+  font-size: 10px;
+  transition: all 0.3s cubic-bezier(0.05, 0.69, 0.14, 1);
+}
+.side:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+.side .side__inner {
+  position: relative;
+  height: 100%;
+  white-space: nowrap;
+}
+.side a {
+  color: inherit;
+  word-spacing: 0;
+  transition: all 0.3s cubic-bezier(0.05, 0.69, 0.14, 1);
+}
+.side .top,
+.side .bottom {
+  position: absolute;
+  left: 0;
+  -webkit-transform: rotate(-90deg) perspective(1px);
+          transform: rotate(-90deg) perspective(1px);
+  -webkit-transform-origin: 50px 50px;
+          transform-origin: 50px 50px;
+  height: 50px;
+  line-height: 50px;
+  white-space: nowrap;
+  word-spacing: .5rem;
+}
+.side .top {
+  top: 25px;
+  text-align: right;
+  color: black;
+}
+.side .bottom {
+  top: auto;
+  bottom: 75px;
+}
+.side .bottom:hover a {
+  color: rgba(0, 0, 0, 0.2);
+}
+.side .bottom:hover a:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/**
+ * The first navigation
+ */
+.anchornav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.anchornav li {
+  display: block;
+}
+.anchornav li::after {
+  content: '';
+  width: 1.3rem;
+  display: block;
+  height: 2px;
+  background: black;
+}
+.anchornav li:last-child::after {
+  display: none;
+}
+.anchornav a {
+  display: block;
+  padding: 1em 0;
+  font-family: "nimbus-sans", sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.05, 0.69, 0.14, 1);
+}
+.anchornav a span {
+  display: inline;
+  padding: .5em 0 0;
+  opacity: .3;
+  letter-spacing: normal;
+  font-family: "ff-meta-serif-web-pro", serif;
+  text-transform: none;
+}
+.anchornav a:hover {
+  color: #de5f5f;
+}
+.anchornav a:hover span {
+  opacity: 1;
+  color: #181818;
+}
+
+/**
+ * The different sections
+ */
+.section {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  min-height: 60vh;
+  width: 100%;
+  align-content: center;
+  padding: 20vh 50px 20vh 75px;
+}
+.section svg {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 50px;
+}
+.section svg.bottom {
+  bottom: 0;
+  top: auto;
+  fill: grey;
+}
+.section .section__inner {
+  height: 100%;
+  max-width: 800px;
+  margin: auto auto auto 0;
+}
+.section.section--hello {
+  background-color: #9bd6b8;
+  color: #181818;
+}
+.section.section--intro {
+  background-color: white;
+  color: #555;
+}
+.section.section--about {
+  background-color: #de5f5f;
+  color: white;
+}
+.section.section--about svg {
+  fill: #de5f5f;
+}
+.section.section--clients {
+  background-color: #343436;
+  color: white;
+}
+.section.section--clients svg {
+  fill: #343436;
+}
+.section.section--portfolio {
+  background-color: #FDEF52;
+  color: white;
+}
+.section.section--portfolio svg {
+  top: -20px;
+  fill: #FDEF52;
+}
+.section.section--portfolio svg.bottom {
+  top: auto;
+  bottom: -50px;
+}
+.section.section--portfolio1 {
+  background-color: #3A99D8;
+  color: white;
+}
+.section.section--portfolio1 svg {
+  top: -50px;
+  fill: #3A99D8;
+}
+.section.section--pepperhill svg {
+  top: -50px;
+  fill: #3A99D8;
+}
+.section.section--contact svg {
+  fill: white;
+}
+
+/**
+ * Typo
+ */
+h1, .h1, h2, .h2, h3, .h3, h4, .h5 {
+  font-family: "nimbus-sans", sans-serif;
+  font-weight: bold;
+  margin: 0 0 1em;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+@media (min-width: 30rem) {
+  h1, .h1, h2, .h2, h3, .h3, h4, .h5 {
+    letter-spacing: -2px;
+  }
+}
+h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h5 a {
+  color: inherit;
+}
+h1 a:hover, .h1 a:hover, h2 a:hover, .h2 a:hover, h3 a:hover, .h3 a:hover, h4 a:hover, .h5 a:hover {
+  border-bottom: .1875rem solid;
+}
+h1 span, .h1 span, h2 span, .h2 span, h3 span, .h3 span, h4 span, .h5 span {
+  color: #de5f5f;
+}
+
+h1, .h1 {
+  font-size: 1.2rem;
+}
+@media (min-width: 30rem) {
+  h1, .h1 {
+    font-size: 2.5rem;
+  }
+}
+
+h2, .h2 {
+  font-size: 1.2rem;
+}
+@media (min-width: 30rem) {
+  h2, .h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.pre {
+  display: inline-block;
+  font-size: 12px;
+  margin: 0;
+  opacity: .8;
+  letter-spacing: 1.4px;
+  word-spacing: .2rem;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+  color: inherit;
+}
+.pre span {
+  font-size: .9em;
+  margin-right: .4em;
+  opacity: .5;
+}
+.pre:hover {
+  opacity: 1;
+}
+
+p {
+  font-size: .75rem;
+  line-height: 1.4;
+}
+@media (min-width: 30rem) {
+  p {
+    font-size: .875rem;
+  }
+}
+p a {
+  font-weight: bold;
+  color: inherit;
+}
+p a:hover {
+  border-bottom: .1875rem solid;
+}
+
+.lead {
+  display: block;
+  font-size: .875rem;
+  margin: 0;
+}
+@media (min-width: 30rem) {
+  .lead {
+    font-size: 1rem;
+  }
+}
+
+.portfolio {
+  font-size: .75rem;
+}
+.portfolio.block {
+  display: inline-block;
+  width: 100%;
+}
+@media (min-width: 30rem) {
+  .portfolio.block {
+    width: 30%;
+  }
+}
+.portfolio .link {
+  display: block;
+  margin: 2em 0 0 0;
+  color: #555;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+.portfolio p {
+  font-size: inherit;
+  color: #343436;
+  opacity: .7;
+}
+</style>
+</head>
+<body>
+<script src="https://use.typekit.net/ehh4lya.js">
+</script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+<nav class="side">
+    <div class="side__inner">
+        <div class="top">
+          <a href="#">Mehmet Kose</a>
+        </div>
+        <div class="bottom">
+            <a href="https://dribbble.com/mehmetkose">DRIBBBLE</a>
+            <a href="https://twitter.com/mehmetkose">TWITTER</a>
+            <a href="mailto:hello@mehmetkosedev@gmail.com">EMAIL ME</a>
+        </div>
+    </div>
+</nav>
+
+<section class="section section--hello" id="hello">
+    <div class="section__inner">
+        <div class="block">
+            <a class="pre" href="#intro">
+              <span>#0</span>Hello</a>
+            <h2>Hello</h2>
+            <ul class="anchornav">
+                <li>
+                  <a href="#intro">Intro <span>#1 What is going on?</span>
+                </a>
+                </li>
+                <li>
+                  <a href="#about">About <span>#2 Who is this guy?</span>
+                </a>
+                </li>
+                <li>
+                  <a href="#clients">Clients <span>#3 Who did he work for?</span>
+                </a>
+                </li>
+                <li>
+                  <a href="#portfolio">Portfolio <span>#4 What did he do?</span>
+                </a>
+                </li>
+                <li>
+                  <a href="#contact">Contact <span>#5 Write him a message</span>
+                </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section section--intro" id="intro">
+    <div class="section__inner">
+        <div class="block">
+            <a class="pre" href="#intro">
+              <span>#1</span>Intro</a>
+            <h1>Mehmet Kose is a<br>
+                Web Architect<br>
+                based in Antalya<br>
+                Turkey.</h1>
+            <p class="lead">
+                See small bits of his design work on <a href="https://dribbble.com/mehmetkose" class="link">Dribbble</a>, quick thoughts on <a href="https://twitter.com/mehmetkose" class="link">Twitter</a>, and a full resume on <a href="/mehmet-kose-resume.pdf" class="link">here</a>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section section--about" id="about">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none">
+        <polygon points="100 0 100 10 0 10" />
+    </svg>
+
+    <div class="section__inner">
+        <div class="block">
+            <a class="pre" href="#about">
+              <span>#2</span>Building</a>
+            <h2>Mehmet works for companies and agencies, creating responsive web applications.</h2>
+            <p class="lead">Building the right foundation to ongoing optimization and support. In short, he tries to make the web a better place.</p>
+        </div>
+    </div>
+
+</section>
+
+<section class="section section--clients" id="clients">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none">
+        <polygon points="100 10 0 0 0 10" />
+    </svg>
+
+    <div class="section__inner">
+        <div class="block">
+            <a class="pre" href="#clients">
+              <span>#3</span>Clients</a>
+            <h2>Mehmet works with corporations, institutions and startups in a wide range of industries.</h2>
+            <p class="lead">Here are some of his clients, he has had the pleasure working with:</p>
+        </div>
+    </div>
+
+</section>
+
+<section class="section section--portfolio1" id="portfolio">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M0 100 C 20 0 50 0 100 100 Z">
+
+        </path>
+    </svg>
+
+    <div class="section__inner">
+        <div class="block">
+            <a class="pre" href="#portfolio">
+              <span>#4</span>Portfolio</a>
+            <h2>Portfolio Item #1</h2>
+            <p class="lead">Here are some of his clients, he has had the pleasure working with.</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="section section--portfolio" id="portfolio2">
+    <div class="section__inner">
+        <div class="block">
+            <h2>Portfolio Item #2</h2>
+            <p>Descripton of said portfolio item.</p>
+        </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 102" preserveAspectRatio="none" class="bottom">
+        <path d="M0 0 L50 100 L100 0 Z">
+
+        </path>
+    </svg>
+</section>
+
+
+<section class="section section--contact" id="contact">
+    <div class="section__inner">
+        <div class="block">
+            <a class="pre" href="#contact">
+              <span>#5</span>Get in touch</a>
+            <h2>For work inquiries<br>please email:<br>
+                <span>
+                  <a href="mailto:mehmetkosedev@gmail.com">mehmetkosedev@gmail.com</a>
+                </span>
+              </h2>
+            <p class="lead">More links: <a href="https://dribbble.com/mehmetkose">Dribbble</a>, <a href="https://twitter.com/mehmetkose">Twitter</a> and <a href="https://www.linkedin.com/in/mehmet-kose-web-dev/">Linkedin</a>.</p>
+        </div>
+    </div>
+</section>
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'>
+</script>
+</body>
+</html>
