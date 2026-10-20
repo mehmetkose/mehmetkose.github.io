@@ -22,6 +22,7 @@ Add a Markdown file to `src/content/blog/`. The file name becomes the URL:
 title: 'My post'
 description: 'One sentence that shows up in search results.'
 pubDate: 2026-10-20
+# pubDate: 2026-10-20T14:30:00Z   # add a time when two posts share a day, so the newer one lists first
 # updatedDate: 2026-11-01
 # draft: true   # visible in dev, left out of the built site
 ---
