@@ -1,18 +1,18 @@
 ---
-name: plans
-description: Manage the plans/ work queue — capture an idea, save the current conversation as a plan, research a draft into a real plan, hand it to an agent, and verify it landed. Invoked as /plans add, /plans save, /plans write, /plans dispatch, /plans sync, /plans status, /plans init. Also triggers on natural language for the save move: "save this as a plan", "turn this into a plan", "write this up as a plan", "add this to the plans folder", "plan this for later", or any request to record what we have been discussing as work to do later.
+name: planner
+description: Manage the planner/ work queue — capture an idea, save the current conversation as a plan, research a draft into a real plan, hand it to an agent, and verify it landed. Invoked as /planner add, /planner save, /planner write, /planner dispatch, /planner sync, /planner status, /planner init. Also triggers on natural language for the save move: "save this as a plan", "turn this into a plan", "write this up as a plan", "add this to the planner", "plan this for later", or any request to record what we have been discussing as work to do later.
 ---
 
-# Plans
+# Planner
 
-A queue skill. `plans/` holds one markdown file per piece of work; the folder it
+A queue skill. `planner/` holds one markdown file per piece of work; the folder it
 sits in is its state. This skill moves files between those folders and writes
 their contents. It does not decide what the project should do next — that's the
 user's call — and it does not do the implementation work itself except when
 dispatching to a subagent.
 
 ```
-plans/
+planner/
   README.md      the index: what is next, what is open
   drafts/        captured, not thought through
   next/          written up, ready to dispatch
@@ -21,24 +21,24 @@ plans/
   discarded/     decided against, reason kept
 ```
 
-Naming is `<area>-<slug>.md`. Area prefixes are listed in `plans/README.md` — read
+Naming is `<area>-<slug>.md`. Area prefixes are listed in `planner/README.md` — read
 it before naming a new file and use an existing prefix if one fits. If none fits,
 add a prefix to the README's list in the same move and say so.
 
 ## Routing
 
-Read the argument after `/plans` and run exactly that move. No argument, or an
+Read the argument after `/planner` and run exactly that move. No argument, or an
 unrecognised one: run **status**.
 
 | Invocation | Move |
 | --- | --- |
-| `/plans add <anything>` | [Add](#add) |
-| `/plans save`, or "save this as a plan" | [Save](#save) |
-| `/plans write [file]` | [Write](#write) |
-| `/plans dispatch [file]` | [Dispatch](#dispatch) |
-| `/plans sync` | [Sync](#sync) |
-| `/plans status`, `/plans` | [Status](#status) |
-| `/plans init` | [Init](#init) |
+| `/planner add <anything>` | [Add](#add) |
+| `/planner save`, or "save this as a plan" | [Save](#save) |
+| `/planner write [file]` | [Write](#write) |
+| `/planner dispatch [file]` | [Dispatch](#dispatch) |
+| `/planner sync` | [Sync](#sync) |
+| `/planner status`, `/planner` | [Status](#status) |
+| `/planner init` | [Init](#init) |
 
 **Add or Save?** Both capture. The difference is where the substance lives. If the
 user hands you a sentence you have not worked on — "retry failed webhooks with
@@ -47,7 +47,7 @@ already in, that's **Save**, and it usually skips `drafts/` because the research
 step has effectively already happened. When genuinely unclear, ask in one line.
 
 Save is the only move that fires on natural language. Everything else needs its
-explicit `/plans` invocation — do not silently dispatch, sync, or move files
+explicit `/planner` invocation — do not silently dispatch, sync, or move files
 because a conversation drifted near the subject.
 
 ---
@@ -58,7 +58,7 @@ Cheap capture. The user saw something and does not want to lose it. Speed is the
 whole point: **do not investigate, do not read files, do not ask questions.**
 
 1. Pick an area prefix and a slug from what they said.
-2. Write `plans/drafts/<area>-<slug>.md`:
+2. Write `planner/drafts/<area>-<slug>.md`:
 
 ```markdown
 # <one-line restatement of the idea>
@@ -83,7 +83,7 @@ making a second one, and say which file you appended to.
 ## Save
 
 Turn the conversation you are in into a plan. Triggered by "save this as a plan",
-"turn this into a plan", "plan this for later", or `/plans save`.
+"turn this into a plan", "plan this for later", or `/planner save`.
 
 A long discussion has usually already done the Write step's work — the cause got
 found, the files got read, an approach got argued out. So this move writes a real
@@ -91,7 +91,7 @@ plan, not a one-line capture, and usually lands in `next/`.
 
 If the conversation ran in plan mode, the approved plan file under
 `~/.claude/plans/` is a good source. It lives outside the repository, though, so
-the file in `plans/` has to stand on its own: copy the substance, never link to it.
+the file in `planner/` has to stand on its own: copy the substance, never link to it.
 
 ### Where it lands
 
@@ -101,7 +101,7 @@ Read the conversation back before deciding. Land it in:
   checkable. Write it with [TEMPLATE.md](TEMPLATE.md), same standard as Write.
 - **`drafts/`** — it was exploratory, or the cause is still a guess, or the scope
   is still moving. Write down where the thinking got to and what the next
-  question is. Say in your reply that `/plans write` will finish it.
+  question is. Say in your reply that `/planner write` will finish it.
 
 Do not inflate a musing into a `next/` plan because the transcript is long.
 Length is not resolution. If you cannot fill Verification from the conversation,
@@ -133,7 +133,7 @@ The transcript is a worse source than it looks, in specific ways:
 
 ### Then
 
-1. Pick `<area>-<slug>.md` from `plans/README.md`'s prefixes. Check `next/`,
+1. Pick `<area>-<slug>.md` from `planner/README.md`'s prefixes. Check `next/`,
    `open/`, and `drafts/` for a file on the same subject — append to it rather
    than opening a rival plan, and say which you appended to.
 2. Write the file.
@@ -159,11 +159,11 @@ Target: the named file, else the only draft, else list `drafts/` and ask which.
 - Read the root `CLAUDE.md` and `AGENTS.md`, any nested ones in the folders the
   change touches, and the docs they point to, for the rules the change has to
   respect.
-- Check `plans/done/` and `plans/discarded/` for an earlier attempt at the same
+- Check `planner/done/` and `planner/discarded/` for an earlier attempt at the same
   thing.
 - For anything visual, check it in a real browser before claiming what it looks
   like.
-- Search `plans/next/` and `plans/open/` for overlap. If two plans would touch the
+- Search `planner/next/` and `planner/open/` for overlap. If two plans would touch the
   same lines, say so in the plan.
 
 A draft written by [Save](#save) may already carry Non-goals and Log entries
@@ -171,7 +171,7 @@ recording approaches that were tried and rejected. Keep them. Do not re-propose
 something the draft already records as ruled out without saying why it is back.
 
 Then write the plan over the draft using [TEMPLATE.md](TEMPLATE.md) and move it
-to `plans/next/`.
+to `planner/next/`.
 
 Hold these standards:
 
@@ -197,14 +197,14 @@ Hand a `next/` plan to an agent.
    first:
    - If they forbid branches or say to work in the working tree, work on the
      current branch, in the working tree, and do not create a branch.
-   - If they say nothing, create a branch `plans/<area>-<slug>` from the default
+   - If they say nothing, create a branch `planner/<area>-<slug>` from the default
      branch and work there. Never work directly on the default branch.
-3. Move the plan to `plans/open/` and add to the file:
+3. Move the plan to `planner/open/` and add to the file:
 
 ```markdown
 ## Dispatch
 
-Dispatched YYYY-MM-DD on branch `plans/<area>-<slug>`.
+Dispatched YYYY-MM-DD on branch `planner/<area>-<slug>`.
 ```
 
    or, when the project's rules keep the work in the working tree:
@@ -254,7 +254,7 @@ Then:
   date and the reason. The reason is the point of keeping the file.
 - Branch merged but no plan → mention it; offer to backfill a `done/` entry.
 
-Finally rewrite the **Index** section of `plans/README.md`: one line per file in
+Finally rewrite the **Index** section of `planner/README.md`: one line per file in
 `next/` and `open/`, `- [title](next/file.md) — one-clause hook`, and for open
 files the branch (or "working tree"). Leave the rest of the README alone.
 
@@ -267,7 +267,7 @@ Report as a short table: moved, still open, needs attention.
 Read-only. Count each folder, then list `next/` and `open/` with titles — from the
 files, not the README, since the README can be stale. Flag anything in `open/`
 whose dispatch date is over a week old, and any branch dispatch whose branch is
-gone. If `plans/` does not exist, say so and offer `/plans init`.
+gone. If `planner/` does not exist, say so and offer `/planner init`.
 
 No file writes in this move.
 
@@ -275,13 +275,13 @@ No file writes in this move.
 
 ## Init
 
-Set up `plans/` in a project that does not have it. If `plans/` already exists,
+Set up `planner/` in a project that does not have it. If `planner/` already exists,
 say so and stop.
 
-1. Create `plans/drafts/`, `plans/next/`, `plans/open/`, `plans/done/` and
-   `plans/discarded/`, each with an empty `.gitkeep` so git keeps the empty
+1. Create `planner/drafts/`, `planner/next/`, `planner/open/`, `planner/done/` and
+   `planner/discarded/`, each with an empty `.gitkeep` so git keeps the empty
    folders.
-2. Write `plans/README.md` from [STARTER-README.md](STARTER-README.md). Replace
+2. Write `planner/README.md` from [STARTER-README.md](STARTER-README.md). Replace
    the whole area list under Naming, examples included, with prefixes for this
    project: one per top-level area of the repository (look at the top-level
    folders and the docs), each with a one-clause description of what it covers.

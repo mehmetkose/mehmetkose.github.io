@@ -1,10 +1,10 @@
-# Plans
+# Planner
 
 The work queue. One markdown file per piece of work, moving through folders as its
 state changes. Plain files in git, so any agent — and I, six weeks from now — can
 read the whole queue without asking anyone.
 
-Run `/plans` to work the queue. It has six moves: `add`, `save`, `write`,
+Run `/planner` to work the queue. It has six moves: `add`, `save`, `write`,
 `dispatch`, `sync`, and `status`. A seventh, `init`, created this folder.
 
 `add` captures a one-line idea into `drafts/`. `save` writes up the conversation
@@ -35,7 +35,7 @@ touches, so `ls` groups related work:
 
 ## Index
 
-Kept current by `/plans sync`. Not synced yet.
+Kept current by `/planner sync`. Not synced yet.
 
 ### Next
 
