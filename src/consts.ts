@@ -23,7 +23,7 @@ export const AUTHOR = {
 // Google Search Console → Add property → URL prefix → https://mehmetkose.github.io/
 // → "HTML tag" method. Paste only the value of `content="..."` here, deploy,
 // then click Verify. Leave empty to skip the tag.
-export const GOOGLE_SITE_VERIFICATION = '';
+export const GOOGLE_SITE_VERIFICATION = 'C_3KdlQ3Tgqhf2pte8wWptCNjsT_nLo50GPIMcgM-hc';
 
 // Shown on the home page. Add more entries as you publish them.
 export const PROJECTS = [
