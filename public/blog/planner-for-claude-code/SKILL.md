@@ -197,14 +197,26 @@ Hand a `next/` plan to an agent.
    first:
    - If they forbid branches or say to work in the working tree, work on the
      current branch, in the working tree, and do not create a branch.
-   - If they say nothing, create a branch `planner/<area>-<slug>` from the default
-     branch and work there. Never work directly on the default branch.
-3. Move the plan to `planner/open/` and add to the file:
+   - Otherwise create a branch from the default branch and work there. Never
+     work directly on the default branch.
+3. Name the branch. The project's convention wins over this skill's. Use the
+   first of these that exists:
+   - A naming rule in `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md` or a doc they
+     point to, or one that a git hook or CI check enforces.
+   - The pattern most existing branches follow (`git branch -a`), such as
+     `feature/<slug>`, `fix/<slug>` or `<initials>/<slug>`, with the plan's slug
+     as the description.
+   - `planner/<area>-<slug>`, when the project has no convention.
+
+   If the convention needs something the plan does not have, such as a ticket
+   number, ask for it instead of making one up.
+4. Move the plan to `planner/open/` and add to the file, with the exact branch
+   name, since Sync finds the branch from this line:
 
 ```markdown
 ## Dispatch
 
-Dispatched YYYY-MM-DD on branch `planner/<area>-<slug>`.
+Dispatched YYYY-MM-DD on branch `<branch>`.
 ```
 
    or, when the project's rules keep the work in the working tree:
@@ -215,12 +227,12 @@ Dispatched YYYY-MM-DD on branch `planner/<area>-<slug>`.
 Dispatched YYYY-MM-DD in the working tree on `<current branch>`, per AGENTS.md.
 ```
 
-4. Launch one subagent (the Agent tool) with the **full text of the plan** in the
+5. Launch one subagent (the Agent tool) with the **full text of the plan** in the
    prompt — the plan is the brief, not a pointer to one. The subagent has not
    seen this conversation. Tell it to implement, run the project's checks, follow
    the project's git rules, and report what it changed and what it could not do.
    Add: if the plan turns out to be wrong, stop and report rather than improvise.
-5. When it reports, append its outcome to the plan's `## Log` and tell the user
+6. When it reports, append its outcome to the plan's `## Log` and tell the user
    what landed. Do not commit or push unless they ask.
 
 One plan per dispatch. Parallel dispatches are fine only if their file sets do not
@@ -238,9 +250,10 @@ queue has gone stale.
 
 For each file in `open/`:
 
-1. Did the change land? For a branch dispatch: does the branch exist, and is it
-   merged into the default branch? For a working-tree dispatch: is the change in
-   the working tree or in a commit since the dispatch date?
+1. Did the change land? For a branch dispatch: does the branch named in the
+   plan's `## Dispatch` section exist, and is it merged into the default branch?
+   For a working-tree dispatch: is the change in the working tree or in a commit
+   since the dispatch date?
 2. `git log --oneline <default branch> -20` and `git diff` — confirm the change is
    actually there, not just that a branch was merged.
 3. Run the plan's own Verification. Merged is not the same as done.
