@@ -1,0 +1,45 @@
+---
+import PostList from '../../components/PostList.astro';
+import { SITE_LANG, SITE_TITLE } from '../../consts';
+import Base from '../../layouts/Base.astro';
+import { getPosts } from '../../lib/posts';
+import { breadcrumbs, ids, personRef } from '../../lib/schema';
+
+const posts = await getPosts();
+
+const site = Astro.site ?? Astro.url;
+const title = `Blog · ${SITE_TITLE}`;
+const description = `Posts by ${SITE_TITLE} on software development, open source and building developer tools.`;
+const schema = [
+	{
+		'@type': 'Blog',
+		'@id': ids(site).blog,
+		url: new URL('/blog/', site).href,
+		name: `${SITE_TITLE}'s blog`,
+		description,
+		inLanguage: SITE_LANG,
+		isPartOf: { '@id': ids(site).website },
+		author: personRef(site),
+		publisher: { '@id': ids(site).person },
+		blogPost: posts.map((post) => {
+			const url = new URL(`/blog/${post.id}/`, site).href;
+			return {
+				'@type': 'BlogPosting',
+				'@id': `${url}#article`,
+				url,
+				headline: post.data.title,
+				datePublished: post.data.pubDate.toISOString(),
+			};
+		}),
+	},
+	breadcrumbs(site, [
+		{ name: 'Home', path: '/' },
+		{ name: 'Blog', path: '/blog/' },
+	]),
+];
+---
+
+<Base title={title} description={description} image="/og/blog.png" imageAlt={`Blog · ${SITE_TITLE}`} schema={schema}>
+	<h1>Blog</h1>
+	<PostList posts={posts} showDescription />
+</Base>

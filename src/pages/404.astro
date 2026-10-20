@@ -1,0 +1,9 @@
+---
+import { SITE_TITLE } from '../consts';
+import Base from '../layouts/Base.astro';
+---
+
+<Base title={`Page not found · ${SITE_TITLE}`} description="This page doesn't exist." noindex>
+	<h1>Page not found</h1>
+	<p>That page doesn't exist. Try the <a href="/">home page</a> or the <a href="/blog/">blog</a>.</p>
+</Base>

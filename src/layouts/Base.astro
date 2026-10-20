@@ -1,0 +1,41 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_LANG } from '../consts';
+import { baseGraph, toJsonLd } from '../lib/schema';
+
+interface Props {
+	title: string;
+	description: string;
+	type?: 'website' | 'article';
+	image?: string;
+	imageAlt?: string;
+	noindex?: boolean;
+	/** Extra structured-data nodes for this page (added to the site-wide ones). */
+	schema?: Record<string, unknown>[];
+}
+
+const { schema = [], ...head } = Astro.props;
+const site = Astro.site ?? Astro.url;
+const jsonLd = head.noindex ? undefined : toJsonLd([...baseGraph(site), ...schema]);
+---
+
+<!doctype html>
+<html lang={SITE_LANG}>
+	<head>
+		<BaseHead {...head} />
+		{jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+		<slot name="head" />
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<div class="container">
+			<Header />
+			<main id="main">
+				<slot />
+			</main>
+			<Footer />
+		</div>
+	</body>
+</html>

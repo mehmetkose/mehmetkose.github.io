@@ -1,0 +1,51 @@
+---
+import { SITE_TITLE } from '../consts';
+
+const path = Astro.url.pathname;
+const links = [
+	{ href: '/blog/', label: 'Blog' },
+	// Lives in its own repo (mehmetkose/react-websocket), so it 404s in local dev.
+	{ href: '/react-websocket/', label: 'react-websocket' },
+];
+---
+
+<header class="site-header">
+	<a class="brand" href="/">{SITE_TITLE}</a>
+	<nav aria-label="Main">
+		{
+			links.map(({ href, label }) => (
+				<a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>
+					{label}
+				</a>
+			))
+		}
+	</nav>
+</header>
+
+<style>
+	.site-header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.5rem 1.5rem;
+		padding-block: 2rem 1rem;
+	}
+	.brand {
+		color: var(--text);
+		font-weight: 700;
+		text-decoration: none;
+	}
+	nav {
+		display: flex;
+		gap: 1.25rem;
+	}
+	nav a {
+		color: var(--muted);
+		text-decoration: none;
+	}
+	nav a:hover,
+	nav a[aria-current='page'] {
+		color: var(--text);
+	}
+</style>

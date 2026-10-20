@@ -1,0 +1,83 @@
+---
+import PostList from '../components/PostList.astro';
+import { GITHUB_URL, PROJECTS, SITE_DESCRIPTION, SITE_LANG, SITE_TAGLINE, SITE_TITLE } from '../consts';
+import Base from '../layouts/Base.astro';
+import { getPosts } from '../lib/posts';
+import { ids } from '../lib/schema';
+
+const latestPosts = (await getPosts()).slice(0, 5);
+
+const site = Astro.site ?? Astro.url;
+const title = `${SITE_TITLE} · ${SITE_TAGLINE}`;
+const schema = [
+	{
+		'@type': 'ProfilePage',
+		'@id': new URL('/#webpage', site).href,
+		url: site.href,
+		name: title,
+		description: SITE_DESCRIPTION,
+		inLanguage: SITE_LANG,
+		isPartOf: { '@id': ids(site).website },
+		mainEntity: { '@id': ids(site).person },
+	},
+];
+---
+
+<Base title={title} description={SITE_DESCRIPTION} schema={schema}>
+	<section class="intro" aria-labelledby="intro-heading">
+		<h1 id="intro-heading">Hi, I'm Mehmet.</h1>
+		<p>
+			I'm a software developer based in Dublin, Ireland. I build open-source tools and write about
+			what I learn along the way.
+		</p>
+	</section>
+
+	<section aria-labelledby="projects-heading">
+		<h2 id="projects-heading">Projects</h2>
+		<ul class="projects">
+			{
+				PROJECTS.map((project) => (
+					<li>
+						<a href={project.url}>{project.name}</a>
+						<p>{project.description}</p>
+					</li>
+				))
+			}
+		</ul>
+		<p><a href={GITHUB_URL}>More on GitHub <span aria-hidden="true">→</span></a></p>
+	</section>
+
+	<section aria-labelledby="writing-heading">
+		<h2 id="writing-heading">Writing</h2>
+		<PostList posts={latestPosts} />
+		<p><a href="/blog/">All posts <span aria-hidden="true">→</span></a></p>
+	</section>
+</Base>
+
+<style>
+	.intro {
+		margin-block: 2rem 3rem;
+	}
+	.intro h1 {
+		margin-bottom: 0.75rem;
+	}
+	.intro p {
+		font-size: 1.15rem;
+		color: var(--muted);
+	}
+	.projects {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.projects li {
+		padding-block: 0.6rem;
+	}
+	.projects a {
+		font-weight: 600;
+	}
+	.projects p {
+		margin: 0.25rem 0 0;
+		color: var(--muted);
+	}
+</style>

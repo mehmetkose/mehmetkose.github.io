@@ -1,0 +1,161 @@
+:root {
+	--bg: #ffffff;
+	--text: #1a1a1a;
+	--muted: #5f6368;
+	--border: #e6e6e6;
+	--link: #0b57d0;
+	--code-bg: #f4f4f5;
+
+	--font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #111214;
+		--text: #e8e8e8;
+		--muted: #a0a4a8;
+		--border: #2a2c30;
+		--link: #8ab4f8;
+		--code-bg: #1d1f22;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font-sans);
+	font-size: 1.0625rem;
+	line-height: 1.65;
+}
+
+.container {
+	max-width: 42rem;
+	margin: 0 auto;
+	padding-inline: 1.25rem;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+}
+h1 {
+	font-size: 2rem;
+	margin: 0 0 1rem;
+}
+h2 {
+	font-size: 1.15rem;
+	margin: 2.5rem 0 0.5rem;
+}
+h3 {
+	font-size: 1.05rem;
+	margin: 2rem 0 0.5rem;
+}
+
+a {
+	color: var(--link);
+	text-underline-offset: 0.15em;
+}
+
+.muted {
+	color: var(--muted);
+}
+
+/* Blog post body (rendered Markdown) */
+.prose > :first-child {
+	margin-top: 0;
+}
+.prose h2 {
+	font-size: 1.35rem;
+}
+.prose img {
+	max-width: 100%;
+	height: auto;
+}
+.prose blockquote {
+	margin: 1.5rem 0;
+	padding-left: 1rem;
+	border-left: 3px solid var(--border);
+	color: var(--muted);
+}
+.prose hr {
+	border: 0;
+	border-top: 1px solid var(--border);
+	margin: 2rem 0;
+}
+
+code {
+	font-family: var(--font-mono);
+	font-size: 0.9em;
+	background: var(--code-bg);
+	padding: 0.1em 0.35em;
+	border-radius: 4px;
+}
+pre {
+	padding: 1rem;
+	border-radius: 6px;
+	overflow-x: auto;
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+pre code {
+	background: none;
+	padding: 0;
+}
+
+/* Keyboard focus: a clear ring for keyboard users, nothing on mouse click. */
+:focus-visible {
+	outline: 2px solid var(--link);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+/* Hidden until focused with Tab, then lets keyboard users jump past the header. */
+.skip-link {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 10;
+	padding: 0.5rem 0.875rem;
+	border-radius: 6px;
+	background: var(--text);
+	color: var(--bg);
+	font-weight: 600;
+	text-decoration: none;
+	transform: translateY(-200%);
+}
+.skip-link:focus {
+	transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
+/* Text for screen readers only. */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
