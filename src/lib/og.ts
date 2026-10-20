@@ -1,6 +1,6 @@
-// Builds PNG images at build time: social preview cards (1200×630) and the
-// apple-touch-icon. Satori turns text into vector paths, so the output looks
-// the same on every machine; sharp converts the SVG to PNG.
+// Builds social preview cards (1200×630) at build time. Satori turns text
+// into vector paths, so the output looks the same on every machine; sharp
+// converts the SVG to PNG.
 
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -57,25 +57,4 @@ export function renderOgImage({ title, eyebrow, footer }: { title: string; eyebr
 		[content],
 	);
 	return toPng(card, OG_SIZE.width, OG_SIZE.height);
-}
-
-export function renderIcon(size: number) {
-	const icon = h(
-		'div',
-		{
-			width: '100%',
-			height: '100%',
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			background: '#1a1a1a',
-			color: '#ffffff',
-			fontFamily: 'Inter',
-			fontWeight: 700,
-			fontSize: size * 0.46,
-			letterSpacing: '-0.03em',
-		},
-		'mk',
-	);
-	return toPng(icon, size, size);
 }
