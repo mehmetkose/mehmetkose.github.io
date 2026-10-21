@@ -33,5 +33,7 @@ export const PROJECTS = [
 		url: '/react-websocket/',
 		description:
 			'WebSocket hook and real-time toolkit for React: shared connections, auto-reconnect, a send queue and typed messages. Zero dependencies.',
+		// Optional: the project's own llms.txt, linked from /llms.txt.
+		llmsTxt: '/react-websocket/llms.txt',
 	},
 ];
