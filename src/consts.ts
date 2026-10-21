@@ -10,6 +10,7 @@ export const SITE_LOCALE = 'en_IE';
 export const GITHUB_URL = 'https://github.com/mehmetkose';
 export const X_URL = 'https://x.com/mehmetkose';
 export const X_HANDLE = '@mehmetkose';
+export const FUPIO_URL = 'https://fupio.com/mehmetkose';
 
 // Used for structured data (rich results) and the visible byline.
 export const AUTHOR = {
@@ -17,7 +18,7 @@ export const AUTHOR = {
 	jobTitle: 'Software Developer',
 	location: 'Dublin, Ireland',
 	// Profiles that belong to you. Google uses these to connect them to this site.
-	sameAs: [GITHUB_URL, X_URL],
+	sameAs: [GITHUB_URL, X_URL, FUPIO_URL],
 };
 
 // Google Search Console → Add property → URL prefix → https://mehmetkose.github.io/
