@@ -3,7 +3,7 @@
 export const SITE_TITLE = 'Mehmet Kose';
 export const SITE_TAGLINE = 'Software developer in Dublin, Ireland';
 export const SITE_DESCRIPTION =
-	'Software developer based in Dublin, Ireland. Blog posts and open-source projects, including react-websocket.';
+	'Software developer based in Dublin, Ireland. Blog posts and open-source projects, including react-websocket and lokal.';
 export const SITE_LANG = 'en';
 export const SITE_LOCALE = 'en_IE';
 
@@ -28,6 +28,12 @@ export const GOOGLE_SITE_VERIFICATION = 'C_3KdlQ3Tgqhf2pte8wWptCNjsT_nLo50GPIMcg
 
 // Shown on the home page. Add more entries as you publish them.
 export const PROJECTS = [
+	{
+		name: 'lokal',
+		url: '/lokal/',
+		description:
+			'Real HTTPS domains for your local dev servers: every service gets its own https://<name>.lokal URL with a certificate your browser, curl, Node and Python trust.',
+	},
 	{
 		name: 'react-websocket',
 		url: '/react-websocket/',

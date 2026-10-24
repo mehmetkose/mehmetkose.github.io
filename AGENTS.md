@@ -24,7 +24,7 @@ Consult these guides before working on related tasks:
 ## Project notes
 
 - GitHub Pages *user* site for `https://mehmetkose.github.io/` (no `base` in `astro.config.mjs`).
-- `/react-websocket/` is a separate repo deployed to the same domain. Never create a route with that name here; the header link to it 404s in local dev, which is expected.
+- `/react-websocket/` and `/lokal/` are separate repos deployed to the same domain. Never create routes with those names here; the header links to them 404 in local dev, which is expected.
 - `public/robots.txt` governs the whole domain, including project sites.
 - Site-wide settings (name, links, projects, Google verification code) live in `src/consts.ts`.
 - Blog posts: Markdown in `src/content/blog/`, schema in `src/content.config.ts`. Lists are newest first by `pubDate`; when two posts share a day, give the newer one a time (`pubDate: 2026-10-20T14:30:00Z`) so it lists first.
